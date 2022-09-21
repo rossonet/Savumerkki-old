@@ -10,8 +10,8 @@ buildscript {
   }
 }
 
-description = "library template project"
-group = 'org.rossonet.commons'
+description = "java library to manage a system configuration in GitOps fashion"
+group = 'org.rossonet.savumerkki'
 version = '0.0.1'
 
 ext {
@@ -36,6 +36,7 @@ apply plugin: 'maven-publish'
 
 dependencies {
   api group: 'org.json', name: 'json', version: '20211205'
+  implementation 'dnsjava:dnsjava:3.5.1'
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
   testImplementation group: 'com.ginsberg', name: 'junit5-system-exit', version: '1.1.2'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
@@ -134,13 +135,13 @@ publishing {
         }
       }
       pom {
-        name = 'Ar4k Template Library'
-        description = 'Ar4k Template Library by Rossonet.'
+        name = "${project.name}"
+        description = "${project.description}"
         url = 'https://app.rossonet.net/'
         licenses {
           license {
-            name = 'GNU AFFERO GENERAL PUBLIC LICENSE 3.0'
-            url = 'https://www.gnu.org/licenses/agpl-3.0.html'
+            name = 'Apache-2.0 license'
+            url = 'https://www.apache.org/licenses/LICENSE-2.0'
           }
         }
         developers {

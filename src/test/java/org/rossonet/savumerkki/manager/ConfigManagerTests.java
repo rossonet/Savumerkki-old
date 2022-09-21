@@ -1,4 +1,4 @@
-package org.rossonet.tests;
+package org.rossonet.savumerkki.manager;
 
 import java.util.logging.Logger;
 
@@ -7,12 +7,11 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.rossonet.main.Main;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class MainTest {
+public class ConfigManagerTests {
 
-	private static final Logger logger = Logger.getLogger(MainTest.class.getName());
+	private static final Logger logger = Logger.getLogger(ConfigManagerTests.class.getName());
 
 	@AfterEach
 	public void cleanTestsContext() throws Exception {
@@ -22,8 +21,6 @@ public class MainTest {
 	@Test
 	@Order(1)
 	public void runMain() throws Exception {
-		final String[] args = new String[] {};
-		Main.main(args);
 		logger.info("ok");
 	}
 
