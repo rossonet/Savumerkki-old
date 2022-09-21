@@ -12,7 +12,7 @@ import org.xbill.DNS.SimpleResolver;
 import org.xbill.DNS.TextParseException;
 import org.xbill.DNS.Type;
 
-public class DnsUtils {
+public final class DnsHelper {
 
 	public static String fromDnsRecord(final String hostPart, final String domainPart)
 			throws TextParseException, UnknownHostException {
@@ -45,8 +45,8 @@ public class DnsUtils {
 	}
 
 	public static String toDnsRecord(final String name, final String payload) throws IOException {
-		final Iterable<String> chunks = StaticUtils.splitFixSize(Base64.getEncoder().encodeToString(payload.getBytes()),
-				254);
+		final Iterable<String> chunks = GenericStaticUtils
+				.splitFixSize(Base64.getEncoder().encodeToString(payload.getBytes()), 254);
 		final StringBuilder result = new StringBuilder();
 		int counter = 0;
 		for (final String s : chunks) {
@@ -57,7 +57,7 @@ public class DnsUtils {
 		return result.toString();
 	}
 
-	private DnsUtils() {
+	private DnsHelper() {
 		throw new UnsupportedOperationException("Just for static usage");
 
 	}

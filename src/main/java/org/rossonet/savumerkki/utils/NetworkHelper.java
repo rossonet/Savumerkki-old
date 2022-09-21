@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NetworkHelper {
+public final class NetworkHelper {
 
 	private static final Logger logger = Logger.getLogger(NetworkHelper.class.getName());
 
@@ -158,28 +158,9 @@ public class NetworkHelper {
 				return "xxxxxx";
 			}
 		} catch (final Exception e) {
-			logger.info("searching mac of " + ip + "\n" + LogUtils.stackTraceToString(e));
+			logger.info("searching mac of " + ip + "\n" + LogHelper.stackTraceToString(e));
 			return "xxxxxx";
 		}
-	}
-
-	private static long ipAddressToLong(final String ipAddress) {
-		if (ipAddress != null) {
-			final String[] s = ipAddress.split("\\.");
-			if (s != null && s.length == 4) {
-				long result = 0;
-				for (int i = 3; i >= 0; i--) {
-					try {
-						final long n = Long.parseLong(s[3 - i]);
-						result |= n << (i * 8);
-					} catch (final Exception ex) {
-						return -1;
-					}
-				}
-				return result;
-			}
-		}
-		return -1;
 	}
 
 	public static boolean isValidIPAddress(final String ip) {
@@ -212,6 +193,25 @@ public class NetworkHelper {
 			}
 		}
 		return false;
+	}
+
+	private static long ipAddressToLong(final String ipAddress) {
+		if (ipAddress != null) {
+			final String[] s = ipAddress.split("\\.");
+			if (s != null && s.length == 4) {
+				long result = 0;
+				for (int i = 3; i >= 0; i--) {
+					try {
+						final long n = Long.parseLong(s[3 - i]);
+						result |= n << (i * 8);
+					} catch (final Exception ex) {
+						return -1;
+					}
+				}
+				return result;
+			}
+		}
+		return -1;
 	}
 
 	private NetworkHelper() {

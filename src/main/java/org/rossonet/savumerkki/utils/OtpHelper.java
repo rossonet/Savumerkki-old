@@ -31,7 +31,7 @@ import javax.crypto.spec.SecretKeySpec;
  *         Classe helper per la gestione delle password OTP.
  *         https://datatracker.ietf.org/doc/html/rfc6238
  */
-public class OtpHelper {
+public final class OtpHelper {
 	private final static int[] DIGITS_POWER = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 };
 
 	public static boolean checkTOTP(final String seedOTP, final String otpCode, final int finestraOTP,

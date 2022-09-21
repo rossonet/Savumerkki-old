@@ -1,4 +1,4 @@
-package org.rossonet.savumerkki.event;
+package org.rossonet.savumerkki.config.event;
 
 public interface ConfigUpdateEventCallback {
 

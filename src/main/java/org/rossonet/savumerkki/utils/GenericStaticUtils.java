@@ -7,62 +7,16 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
-import javax.naming.ConfigurationException;
 
-public class StaticUtils {
+public final class GenericStaticUtils {
 
 	private static final String ENCRYPTION_ALGORITHM = "AES";
-	private static final String PROTOCOL_SEPARATOR = "://";
-
-	public static void changeLogLevel(final String logLevel) throws ConfigurationException {
-		final Logger rootLogger = Logger.getLogger("");
-		Level targetLevel = Level.INFO;
-		switch (logLevel) {
-		case "all":
-			targetLevel = Level.ALL;
-			break;
-		case "config":
-			targetLevel = Level.CONFIG;
-			break;
-		case "fine":
-			targetLevel = Level.FINE;
-			break;
-		case "finer":
-			targetLevel = Level.FINER;
-			break;
-		case "finest":
-			targetLevel = Level.FINEST;
-			break;
-		case "info":
-			targetLevel = Level.INFO;
-			break;
-		case "off":
-			targetLevel = Level.OFF;
-			break;
-		case "severe":
-			targetLevel = Level.SEVERE;
-			break;
-		case "warning":
-			targetLevel = Level.WARNING;
-			break;
-		default:
-			throw new ConfigurationException("log level " + logLevel
-					+ " not exists. You can use: all, config, fine, finer, finest, info, off, severe or warning");
-		}
-		rootLogger.setLevel(targetLevel);
-		for (final Handler handler : rootLogger.getHandlers()) {
-			handler.setLevel(targetLevel);
-		}
-	}
 
 	public static String convertByteArrayToHexString(final byte[] arrayBytes) {
 		final StringBuffer stringBuffer = new StringBuffer();
@@ -99,10 +53,6 @@ public class StaticUtils {
 		return c.doFinal(dataToEncrypt);
 	}
 
-	public static String getProtoInUrl(final String url) {
-		return url.split(PROTOCOL_SEPARATOR)[0];
-	}
-
 	public static List<String> splitFixSize(final String s, final int chunkSize) {
 		final List<String> chunks = new ArrayList<>();
 		for (int i = 0; i < s.length(); i += chunkSize) {
@@ -111,7 +61,7 @@ public class StaticUtils {
 		return chunks;
 	}
 
-	private StaticUtils() {
+	private GenericStaticUtils() {
 		throw new UnsupportedOperationException("Just for static usage");
 	}
 
