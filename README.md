@@ -1,7 +1,6 @@
-# Savumerkki 
-## configuration API
-
 ![alt text](https://github.com/andrea-ambrosini/Savumerkki/raw/main/artwork/savumerkki.png "Savumerkki Logo")
+
+# Savumerkki - configuration manager Java API
 
 [![Test on master branch with Gradle](https://github.com/rossonet/TemplateCommons/actions/workflows/test-on-master-with-gradle.yml/badge.svg)](https://github.com/rossonet/TemplateCommons/actions/workflows/test-on-master-with-gradle.yml)
 
