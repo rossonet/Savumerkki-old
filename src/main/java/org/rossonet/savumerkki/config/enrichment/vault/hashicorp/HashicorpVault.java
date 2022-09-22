@@ -33,7 +33,11 @@ public class HashicorpVault implements EnrichMap {
 	@Override
 	public String get(final String key) throws Exception {
 		if (vault == null) {
-			vault = new Vault(vaultConfig);
+			synchronized (this) {
+				if (vault == null) {
+					vault = new Vault(vaultConfig);
+				}
+			}
 		}
 		return vault.logical().read(logicalVaultKey).getData().get(key);
 	}
@@ -54,6 +58,11 @@ public class HashicorpVault implements EnrichMap {
 
 	public VaultConfig getVaultConfig() {
 		return vaultConfig;
+	}
+
+	@Override
+	public synchronized void resetConnection() {
+		vault = null;
 	}
 
 }

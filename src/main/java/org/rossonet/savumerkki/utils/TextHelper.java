@@ -14,7 +14,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-public final class GenericStaticUtils {
+public final class TextHelper {
 
 	private static final String ENCRYPTION_ALGORITHM = "AES";
 
@@ -61,7 +61,7 @@ public final class GenericStaticUtils {
 		return chunks;
 	}
 
-	private GenericStaticUtils() {
+	private TextHelper() {
 		throw new UnsupportedOperationException("Just for static usage");
 	}
 

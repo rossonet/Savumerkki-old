@@ -2,8 +2,16 @@ package org.rossonet.savumerkki.manager;
 
 public class MonitoredConfigBuilder {
 
-	MonitoredConfigBuilder(final ConfigManager manager) {
+	private final ConfigManager manager;
 
+	// mantenere non pubblico!
+	MonitoredConfigBuilder(final ConfigManager manager) {
+		this.manager = manager;
+	}
+
+	public ConfigManager build() {
+		// TODO costruzione
+		return null;
 	}
 
 }

@@ -28,7 +28,7 @@ public class ExternalEnrich implements EnrichMap {
 
 	@Override
 	public String get(final String key) {
-		return function.getData(key);
+		return function.getValue(key);
 	}
 
 	public ExternalEnrichFunction getFunction() {
@@ -43,6 +43,11 @@ public class ExternalEnrich implements EnrichMap {
 	@Override
 	public long getTimeoutResolutionMs() {
 		return timeoutResolutionMs;
+	}
+
+	@Override
+	public void resetConnection() {
+		function.reset();
 	}
 
 }

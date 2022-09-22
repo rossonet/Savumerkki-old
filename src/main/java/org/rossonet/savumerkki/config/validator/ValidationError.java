@@ -8,7 +8,6 @@ public final class ValidationError {
 
 	public ValidationError(final String errorDescription, final long errorBeginCharacter,
 			final long errorEndCharacter) {
-		super();
 		this.errorDescription = errorDescription;
 		this.errorBeginCharacter = errorBeginCharacter;
 		this.errorEndCharacter = errorEndCharacter;

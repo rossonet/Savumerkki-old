@@ -19,7 +19,7 @@ public interface Puller {
 
 	public MonitoredConfig getMonitoredConfig();
 
-	public PullerCallback getPullerCallback();
+	public Puller getPullerObserver();
 
 	public URL geturl();
 

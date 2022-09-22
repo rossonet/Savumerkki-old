@@ -14,4 +14,6 @@ public interface EnrichMap {
 
 	public long getTimeoutResolutionMs();
 
+	public void resetConnection();
+
 }

@@ -2,9 +2,11 @@ package org.rossonet.savumerkki.manager;
 
 import java.util.Collection;
 
+import org.json.JSONObject;
 import org.rossonet.savumerkki.config.MonitoredConfig;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
-import org.rossonet.savumerkki.config.event.ConfigUpdateEventCallback;
+import org.rossonet.savumerkki.config.event.ConfigUpdateEventObserver;
+import org.yaml.snakeyaml.Yaml;
 
 public interface ConfigManager extends AutoCloseable {
 
@@ -12,15 +14,19 @@ public interface ConfigManager extends AutoCloseable {
 		return new ConfigManagerBuilder();
 	}
 
-	public void addEnrichMap(EnrichMap enrichMap);
+	public void addGlobalEnrichMap(EnrichMap enrichMap);
 
 	public void addMonitoredConfig(MonitoredConfig monitoredConfig);
 
-	public void addUpdateCallback(ConfigUpdateEventCallback callback);
+	public void addUpdateObserver(ConfigUpdateEventObserver observer);
+
+	public void forceReloadAll();
+
+	public JSONObject getConfigAsJson();
+
+	public Yaml getConfigAsYaml();
 
 	public long getConfigGeneration();
-
-	public ConfigManagerFromToString getGlobalConfig();
 
 	public Collection<EnrichMap> getGlobalEnrichMap();
 
@@ -32,18 +38,15 @@ public interface ConfigManager extends AutoCloseable {
 		return new MonitoredConfigBuilder(this);
 	}
 
-	public Collection<ConfigUpdateEventCallback> getUpdateCallbacks();
+	public Collection<ConfigUpdateEventObserver> getUpdateObservers();
 
-	public void removeEnrichMap(EnrichMap enrichMap);
+	public void removeGlobalEnrichMap(EnrichMap enrichMap);
 
 	public void removeMonitoredConfig(MonitoredConfig monitoredConfig);
 
-	public void removeUpdateCallback(ConfigUpdateEventCallback callback);
+	public void removeUpdateObserver(ConfigUpdateEventObserver observer);
 
 	public void reset();
 
 	public void setGlobalTimeoutMs(long timeout);
-
-	public void updateAll();
-
 }

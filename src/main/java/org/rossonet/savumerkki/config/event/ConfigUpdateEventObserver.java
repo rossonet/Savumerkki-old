@@ -1,6 +1,6 @@
 package org.rossonet.savumerkki.config.event;
 
-public interface ConfigUpdateEventCallback {
+public interface ConfigUpdateEventObserver {
 
 	public void fire(UpdateEvent event);
 

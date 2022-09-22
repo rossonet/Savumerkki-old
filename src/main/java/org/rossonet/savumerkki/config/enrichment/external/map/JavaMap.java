@@ -41,7 +41,11 @@ public class JavaMap implements EnrichMap {
 
 	@Override
 	public String get(final String key) {
-		return map.get(key);
+		if (map != null) {
+			return map.get(key);
+		} else {
+			return null;
+		}
 	}
 
 	public Map<String, String> getMap() {
@@ -56,6 +60,11 @@ public class JavaMap implements EnrichMap {
 	@Override
 	public long getTimeoutResolutionMs() {
 		return timeoutResolutionMs;
+	}
+
+	@Override
+	public void resetConnection() {
+		// nothing to do
 	}
 
 }

@@ -3,9 +3,10 @@ package org.rossonet.savumerkki.config;
 import java.util.Collection;
 
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
-import org.rossonet.savumerkki.config.event.ConfigUpdateEventCallback;
+import org.rossonet.savumerkki.config.event.ConfigUpdateEventObserver;
 import org.rossonet.savumerkki.config.puller.Puller;
 import org.rossonet.savumerkki.config.validator.Validator;
+import org.rossonet.savumerkki.manager.ConfigManager;
 
 public interface MonitoredConfig extends AutoCloseable {
 
@@ -13,9 +14,13 @@ public interface MonitoredConfig extends AutoCloseable {
 
 	public void addPuller(Puller puller);
 
-	public void addUpdateCallback(ConfigUpdateEventCallback callback);
+	public void addUpdateObserver(ConfigUpdateEventObserver observer);
+
+	public void forceReload();
 
 	public long getConfigGeneration();
+
+	public ConfigManager getConfigManager();
 
 	public Validator getConfigValidator();
 
@@ -33,9 +38,9 @@ public interface MonitoredConfig extends AutoCloseable {
 
 	public TemplateVariable getTemplateVariable();
 
-	public Collection<ConfigUpdateEventCallback> getUpdateCallbacks();
-
 	public long getUpdateDelayMs();
+
+	public Collection<ConfigUpdateEventObserver> getUpdateObservers();
 
 	public boolean isAdaptableUpdateDelay();
 
@@ -45,7 +50,7 @@ public interface MonitoredConfig extends AutoCloseable {
 
 	public void removePuller(Puller puller);
 
-	public void removeUpdateCallback(ConfigUpdateEventCallback callback);
+	public void removeUpdateObserver(ConfigUpdateEventObserver observer);
 
 	public void reset();
 
@@ -56,6 +61,4 @@ public interface MonitoredConfig extends AutoCloseable {
 	public void setMaxUpdateDelayMs(long valueInMs);
 
 	public void setMinUpdateDelayMs(long valueInMs);
-
-	public void update();
 }

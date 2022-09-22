@@ -3,7 +3,6 @@ package org.rossonet.savumerkki.config.enrichment;
 public final class EnrichLoggerLine {
 
 	private final EnrichMap enrichMap;
-
 	private final String key;
 	private final long priority;
 	private final boolean secret;
