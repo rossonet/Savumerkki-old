@@ -12,7 +12,7 @@ buildscript {
 
 description = "java library to manage a system configuration in GitOps fashion"
 group = 'org.rossonet.savumerkki'
-version = '0.0.1'
+version = '0.1.0'
 
 ext {
 	sourceCompatibility = 1.8
