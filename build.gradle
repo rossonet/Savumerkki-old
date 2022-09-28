@@ -1,15 +1,3 @@
-buildscript {
-  repositories {
-    mavenCentral()
-    jcenter()
-    maven { url "https://plugins.gradle.org/m2/" }
-  }
-  dependencies {
-    classpath "com.gorylenko.gradle-git-properties:gradle-git-properties:2.4.0"
-    classpath 'de.undercouch:gradle-download-task:3.1.1'
-  }
-}
-
 description = "java library to manage a system configuration in GitOps fashion"
 group = 'org.rossonet.savumerkki'
 version = '0.1.0'
@@ -24,40 +12,7 @@ repositories {
 	jcenter()
 }
 
-apply plugin: 'java'
-apply plugin: 'java-library'
 apply plugin: 'eclipse'
-apply plugin: "com.gorylenko.gradle-git-properties"
-apply plugin: 'jacoco'
-apply plugin: 'base'
-apply plugin: 'distribution'
-apply plugin: 'signing'
-apply plugin: 'maven-publish'
-
-dependencies {
-  api group: 'org.json', name: 'json', version: '20211205'
-  api 'org.yaml:snakeyaml:1.32'
-  api 'dnsjava:dnsjava:3.5.1'
-  
-  // Microsoft Azure vault
-  // https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/keyvault/azure-security-keyvault-secrets
-  implementation 'com.azure:azure-security-keyvault-secrets:4.5.0'
-
-  // Hashicorp Vault
-  // https://bettercloud.github.io/vault-java-driver/
-  implementation 'com.bettercloud:vault-java-driver:5.1.0'
-  
-  // Google Vault API
-  // https://developers.google.com/vault/quickstart/java
-  implementation 'com.google.api-client:google-api-client:2.0.0'
-  implementation 'com.google.oauth-client:google-oauth-client-jetty:1.34.1'
-  implementation 'com.google.apis:google-api-services-vault:v1-rev20220423-2.0.0'
-
-  // Test Tools
-  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-  testImplementation group: 'com.ginsberg', name: 'junit5-system-exit', version: '1.1.2'
-  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-}
 
 task eclipseClosedDependencies {}
 
@@ -71,31 +26,6 @@ eclipse {
 }
 
 task view { doLast { println "Working on project ${project.name} [ ${project.description} ]" } }
-
-jar.doLast { task ->
-	ant.checksum file: task.archivePath
-}
-
-java {
-  withJavadocJar()
-  withSourcesJar()
-}
-
-gitProperties {
-	failOnNoGitDirectory = false
-	customProperty 'component', "${project.name}"
-	dateFormat = "yyyy-MM-dd HH:mm:ssZ"
-	dateFormatTimeZone = 'GMT'
-}
-
-test {
-  useJUnitPlatform()
-}
-
-javadoc{
-	destinationDir = file("${project.buildDir}/docs/javadoc/${project.name}/")
-	failOnError=false
-}
 
 task theiaIdeBackend(type: Exec) {
         workingDir "./"
@@ -133,61 +63,8 @@ task printTheiaIdeBackendDockerCommand(type: Exec) {
 
 task theiaIdeLocalBrowser(type: Exec) {
         group "Theia IDE on Docker Container"
-  	    description 'Open browser to local Theia IDE'
+        description 'Open browser to local Theia IDE'
         workingDir "./"
         commandLine 'xdg-open', 'http://localhost:3000'
 }
 
-publishing {
-  publications {
-    mavenJava(MavenPublication){
-      artifactId = "${project.name}"
-      from components.java
-      versionMapping {
-        usage('java-api') {
-          fromResolutionOf('runtimeClasspath')
-        }
-        usage('java-runtime') {
-          fromResolutionResult()
-        }
-      }
-      pom {
-        name = "${project.name}"
-        description = "${project.description}"
-        url = 'https://app.rossonet.net/'
-        licenses {
-          license {
-            name = 'Apache-2.0 license'
-            url = 'https://www.apache.org/licenses/LICENSE-2.0'
-          }
-        }
-        developers {
-          developer {
-            id = 'ar4k'
-            name = 'Andrea Ambrosini'
-            email = 'andrea.ambrosini@rossonet.org'
-          }
-        }
-        scm {
-          connection = 'scm:git:git://github.com/rossonet/TemplateCommons.git'
-          developerConnection = 'scm:git:ssh://github.com:rossonet/TemplateCommons.git'
-          url = 'https://github.com/rossonet/TemplateCommons/tree/master'
-        }
-      }
-    }
-  }
-  repositories {
-    maven {
-      url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-      name = "sonatype"
-      credentials {
-        username "rossonet"
-        password "${ossrhPassword}"
-      }
-    }
-  }
-}
-
-signing {
-    sign publishing.publications.mavenJava
-}
