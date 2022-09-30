@@ -1,4 +1,4 @@
-package org.rossonet.savumerkki.manager;
+package org.rossonet.savumerkki.config;
 
 import java.util.logging.Logger;
 
@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class ConfigManagerTests {
+public class MonitoredConfigTests {
 
-	private static final Logger logger = Logger.getLogger(ConfigManagerTests.class.getName());
+	private static final Logger logger = Logger.getLogger(MonitoredConfigTests.class.getName());
 
 	@AfterEach
 	public void cleanTestsContext() throws Exception {

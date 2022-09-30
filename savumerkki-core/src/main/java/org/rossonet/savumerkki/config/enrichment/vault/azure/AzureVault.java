@@ -2,7 +2,7 @@ package org.rossonet.savumerkki.config.enrichment.vault.azure;
 
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 
-//TODO Completare!
+//TODO Completare AzureVault!
 public class AzureVault implements EnrichMap {
 	private final int priority;
 	private final long timeoutResolutionMs;
@@ -23,7 +23,7 @@ public class AzureVault implements EnrichMap {
 
 	@Override
 	public String get(final String key) throws Exception {
-		// TODO
+		// TODO completare configurazione Vault Azure
 		return null;
 	}
 
@@ -39,7 +39,7 @@ public class AzureVault implements EnrichMap {
 
 	@Override
 	public void resetConnection() {
-		// TODO Auto-generated method stub
+		// TODO completare configurazione Vault Azure
 
 	}
 }

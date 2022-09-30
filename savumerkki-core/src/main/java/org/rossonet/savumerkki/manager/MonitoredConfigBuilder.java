@@ -1,17 +1,68 @@
 package org.rossonet.savumerkki.manager;
 
+import org.rossonet.savumerkki.config.MonitoredConfig;
+import org.rossonet.savumerkki.config.TemplateVariable;
+import org.rossonet.savumerkki.config.enrichment.EnrichMap;
+import org.rossonet.savumerkki.config.event.ConfigUpdateEventObserver;
+import org.rossonet.savumerkki.config.puller.Puller;
+import org.rossonet.savumerkki.config.validator.Validator;
+
 public class MonitoredConfigBuilder {
 
-	private final ConfigManager manager;
+	private final MonitoredConfig monitoredConfig;
 
 	// mantenere non pubblico!
 	MonitoredConfigBuilder(final ConfigManager manager) {
-		this.manager = manager;
+		this.monitoredConfig = new MonitoredConfigImpl(manager);
 	}
 
-	public ConfigManager build() {
-		// TODO costruzione
-		return null;
+	public MonitoredConfigBuilder addEnrichMap(final EnrichMap enrichMap) {
+		monitoredConfig.addEnrichMap(enrichMap);
+		return this;
+	}
+
+	public MonitoredConfigBuilder addPuller(final Puller puller) {
+		monitoredConfig.addPuller(puller);
+		return this;
+	}
+
+	public MonitoredConfigBuilder addUpdateObserver(final ConfigUpdateEventObserver observer) {
+		monitoredConfig.addUpdateObserver(observer);
+		return this;
+	}
+
+	public MonitoredConfig build() {
+		return monitoredConfig;
+	}
+
+	public MonitoredConfigBuilder setAdaptableUpdateDelay(final boolean isActive) {
+		monitoredConfig.setAdaptableUpdateDelay(isActive);
+		return this;
+	}
+
+	public MonitoredConfigBuilder setDefaultUpdateDelayMs(final long valueInMs) {
+		monitoredConfig.setDefaultUpdateDelayMs(valueInMs);
+		return this;
+	}
+
+	public MonitoredConfigBuilder setMaxUpdateDelayMs(final long valueInMs) {
+		monitoredConfig.setMaxUpdateDelayMs(valueInMs);
+		return this;
+	}
+
+	public MonitoredConfigBuilder setMinUpdateDelayMs(final long valueInMs) {
+		monitoredConfig.setMinUpdateDelayMs(valueInMs);
+		return this;
+	}
+
+	public MonitoredConfigBuilder setTemplateVariable(final TemplateVariable templateVariable) {
+		monitoredConfig.setTemplateVariable(templateVariable);
+		return this;
+	}
+
+	public MonitoredConfigBuilder setValidator(final Validator validator) {
+		monitoredConfig.setValidator(validator);
+		return this;
 	}
 
 }

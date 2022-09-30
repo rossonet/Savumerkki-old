@@ -1,7 +1,6 @@
 package org.rossonet.savumerkki.manager;
 
 import org.json.JSONObject;
-import org.yaml.snakeyaml.Yaml;
 
 /**
  * Text Configuration Manager for json and yaml format
@@ -11,13 +10,23 @@ import org.yaml.snakeyaml.Yaml;
  */
 final class ConfigManagerInterpreter {
 
-	static JSONObject getJsonFromConfig(final ConfigManager configManager) {
-		// TODO JSON
+	static ConfigManager getConfigFromJson(final JSONObject configManager) {
+		// TODO JSON implementare configurazione in json
 		return null;
 	}
 
-	static Yaml getYamlFromConfig(final ConfigManager configManager) {
-		// TODO Yaml
+	static ConfigManager getConfigFromYaml(final String configManager) {
+		// TODO implementare configurazione in Yaml
+		return null;
+	}
+
+	static JSONObject getJsonFromConfig(final ConfigManager configManager) {
+		// TODO JSON implementare configurazione in json
+		return null;
+	}
+
+	static String getYamlFromConfig(final ConfigManager configManager) {
+		// TODO implementare configurazione in Yaml
 		return null;
 	}
 

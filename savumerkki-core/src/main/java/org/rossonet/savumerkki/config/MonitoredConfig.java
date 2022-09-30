@@ -42,6 +42,8 @@ public interface MonitoredConfig extends AutoCloseable {
 
 	public Collection<ConfigUpdateEventObserver> getUpdateObservers();
 
+	public Validator getValidator();
+
 	public boolean isAdaptableUpdateDelay();
 
 	public void pushTemplateConfig(String templateConfig);
@@ -61,4 +63,8 @@ public interface MonitoredConfig extends AutoCloseable {
 	public void setMaxUpdateDelayMs(long valueInMs);
 
 	public void setMinUpdateDelayMs(long valueInMs);
+
+	public void setTemplateVariable(TemplateVariable templateVariable);
+
+	public void setValidator(Validator validator);
 }

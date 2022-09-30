@@ -1,28 +1,59 @@
 package org.rossonet.savumerkki.manager;
 
 import org.json.JSONObject;
-import org.yaml.snakeyaml.Yaml;
+import org.rossonet.savumerkki.config.MonitoredConfig;
+import org.rossonet.savumerkki.config.enrichment.EnrichMap;
+import org.rossonet.savumerkki.config.event.ConfigUpdateEventObserver;
 
 public class ConfigManagerBuilder {
 
+	private ConfigManager configManager;
+
 	// mantenere non pubblico!
 	ConfigManagerBuilder() {
+		configManager = new ConfigManagerImpl();
+	}
 
+	public ConfigManagerBuilder addGlobalEnrichMap(final EnrichMap enrichMap) {
+		configManager.addGlobalEnrichMap(enrichMap);
+		return this;
+	}
+
+	public ConfigManagerBuilder addMonitoredConfig(final MonitoredConfig monitoredConfig) {
+		configManager.addMonitoredConfig(monitoredConfig);
+		return this;
+	}
+
+	public ConfigManagerBuilder addMonitoredConfig(final MonitoredConfigBuilder monitoredConfigBuilder) {
+		return addMonitoredConfig(monitoredConfigBuilder.build());
+	}
+
+	public ConfigManagerBuilder addUpdateObserver(final ConfigUpdateEventObserver observer) {
+		configManager.addUpdateObserver(observer);
+		return this;
 	}
 
 	public ConfigManager build() {
-		// TODO costruzione
-		return null;
+		return configManager;
 	}
 
 	public ConfigManagerBuilder fromJson(final JSONObject jsonConfiguration) {
-		// TODO costruire oggetto da configurazione
-		return null;
+		configManager = ConfigManagerInterpreter.getConfigFromJson(jsonConfiguration);
+		return this;
 	}
 
-	public ConfigManagerBuilder fromYaml(final Yaml yamlConfiguration) {
-		// TODO costruire oggetto da configurazione
-		return null;
+	public ConfigManagerBuilder fromYaml(final String yamlConfiguration) {
+		configManager = ConfigManagerInterpreter.getConfigFromYaml(yamlConfiguration);
+		return this;
+	}
+
+	public MonitoredConfigBuilder newMonitoredConfigBuilder() {
+		return configManager.getNewMonitoredConfigBuilder();
+	}
+
+	public ConfigManagerBuilder setGlobalTimeoutMs(final long timeout) {
+		configManager.setGlobalTimeoutMs(timeout);
+		return this;
 	}
 
 }

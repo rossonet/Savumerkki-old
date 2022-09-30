@@ -6,6 +6,14 @@ import org.rossonet.savumerkki.config.MonitoredConfig;
 
 public interface Puller {
 
+	public static Puller fromUrl(final URL url) {
+		return AbstractPuller.fromUrl(url);
+	}
+
+	public static void registerPuller(final Class<Puller> pullerClass) {
+		AbstractPuller.registerPuller(pullerClass);
+	}
+
 	public void fire();
 
 	public String getChannelControlValue();

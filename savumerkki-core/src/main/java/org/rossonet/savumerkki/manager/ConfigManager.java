@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import org.rossonet.savumerkki.config.MonitoredConfig;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 import org.rossonet.savumerkki.config.event.ConfigUpdateEventObserver;
-import org.yaml.snakeyaml.Yaml;
 
 public interface ConfigManager extends AutoCloseable {
 
@@ -24,7 +23,7 @@ public interface ConfigManager extends AutoCloseable {
 
 	public JSONObject getConfigAsJson();
 
-	public Yaml getConfigAsYaml();
+	public String getConfigAsYaml();
 
 	public long getConfigGeneration();
 

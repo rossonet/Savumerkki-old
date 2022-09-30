@@ -24,7 +24,7 @@ public class GoogleVault implements EnrichMap {
 
 	@Override
 	public String get(final String key) throws Exception {
-		// TODO
+		// TODO completare configurazione Vault Google
 		return null;
 	}
 
@@ -40,7 +40,7 @@ public class GoogleVault implements EnrichMap {
 
 	@Override
 	public void resetConnection() {
-		// TODO Auto-generated method stub
+		// TODO completare configurazione Vault Azure
 
 	}
 
