@@ -2,9 +2,13 @@
 
 # Savumerkki - configuration manager Java API
 
+In Finnish language "savumerkki" means smoke signal.
+
 [![Test on master branch with Gradle](https://github.com/rossonet/TemplateCommons/actions/workflows/test-on-master-with-gradle.yml/badge.svg)](https://github.com/rossonet/TemplateCommons/actions/workflows/test-on-master-with-gradle.yml)
 
 # Savumerkki - client interface (savuctl)
+
+This command line interface uses the API to "control the smoke", to manage the client configuration.
 
 ### Project sponsor 
 
