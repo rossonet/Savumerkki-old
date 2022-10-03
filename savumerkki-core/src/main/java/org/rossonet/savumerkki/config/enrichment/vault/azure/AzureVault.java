@@ -2,18 +2,25 @@ package org.rossonet.savumerkki.config.enrichment.vault.azure;
 
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 
-//TODO Completare AzureVault!
+import com.azure.core.credential.TokenCredential;
+import com.azure.security.keyvault.secrets.SecretClient;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
+
 public class AzureVault implements EnrichMap {
 	private final int priority;
+	private SecretClient secretClient = null;
+
 	private final long timeoutResolutionMs;
 
-	public AzureVault() {
-		this(EnrichMap.DEFAULT_PRIORITY, EnrichMap.DEFAULT_TIMEOUT_RESOLUTION_MS);
+	public AzureVault(final TokenCredential azureCredential, final String keyVaultUrl) {
+		this(azureCredential, keyVaultUrl, EnrichMap.DEFAULT_PRIORITY, EnrichMap.DEFAULT_TIMEOUT_RESOLUTION_MS);
 	}
 
-	public AzureVault(final int priority, final long timeoutResolutionMs) {
+	public AzureVault(final TokenCredential azureCredential, final String keyVaultUrl, final int priority,
+			final long timeoutResolutionMs) {
 		this.priority = priority;
 		this.timeoutResolutionMs = timeoutResolutionMs;
+		this.secretClient = new SecretClientBuilder().vaultUrl(keyVaultUrl).credential(azureCredential).buildClient();
 	}
 
 	@Override
@@ -23,8 +30,7 @@ public class AzureVault implements EnrichMap {
 
 	@Override
 	public String get(final String key) throws Exception {
-		// TODO completare configurazione Vault Azure
-		return null;
+		return secretClient != null ? secretClient.getSecret(key).getValue() : null;
 	}
 
 	@Override
@@ -39,7 +45,9 @@ public class AzureVault implements EnrichMap {
 
 	@Override
 	public void resetConnection() {
-		// TODO completare configurazione Vault Azure
+		if (secretClient != null) {
+			secretClient = null;
+		}
 
 	}
 }
