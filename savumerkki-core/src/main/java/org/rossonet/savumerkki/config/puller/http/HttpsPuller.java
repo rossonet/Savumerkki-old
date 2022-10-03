@@ -1,12 +1,12 @@
-package org.rossonet.savumerkki.config.puller.file;
+package org.rossonet.savumerkki.config.puller.http;
 
 import java.net.URL;
 
 import org.rossonet.savumerkki.config.puller.AbstractPuller;
 
-public class FilePuller extends AbstractPuller {
+public class HttpsPuller extends AbstractPuller {
 
-	private static final String FILE_PULLER_PROTOCOL = "file";
+	private static final String HTTPS_PULLER_PROTOCOL = "https";
 
 	@Override
 	protected void configureFromUrl(final URL url) {
@@ -16,7 +16,7 @@ public class FilePuller extends AbstractPuller {
 
 	@Override
 	protected String getProtocol() {
-		return FILE_PULLER_PROTOCOL;
+		return HTTPS_PULLER_PROTOCOL;
 	}
 
 }

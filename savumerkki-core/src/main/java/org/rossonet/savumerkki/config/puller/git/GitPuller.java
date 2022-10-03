@@ -6,17 +6,17 @@ import org.rossonet.savumerkki.config.puller.AbstractPuller;
 
 public class GitPuller extends AbstractPuller {
 
+	private static final String GIT_PULLER_PROTOCOL = "git";
+
 	@Override
 	protected void configureFromUrl(final URL url) {
 		// TODO Auto-generated method stub
 
 	}
-	// TODO implement this puller
 
 	@Override
 	protected String getProtocol() {
-		// TODO Auto-generated method stub
-		return null;
+		return GIT_PULLER_PROTOCOL;
 	}
 
 }

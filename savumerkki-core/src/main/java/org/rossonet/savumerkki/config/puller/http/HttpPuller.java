@@ -6,17 +6,17 @@ import org.rossonet.savumerkki.config.puller.AbstractPuller;
 
 public class HttpPuller extends AbstractPuller {
 
+	private static final String HTTP_PULLER_PROTOCOL = "http";
+
 	@Override
 	protected void configureFromUrl(final URL url) {
 		// TODO Auto-generated method stub
 
 	}
-	// TODO implement this puller
 
 	@Override
 	protected String getProtocol() {
-		// TODO Auto-generated method stub
-		return null;
+		return HTTP_PULLER_PROTOCOL;
 	}
 
 }

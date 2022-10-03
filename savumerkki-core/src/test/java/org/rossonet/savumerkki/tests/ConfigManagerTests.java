@@ -36,7 +36,9 @@ import org.rossonet.savumerkki.config.validator.YamlValidator;
 import org.rossonet.savumerkki.manager.ConfigManager;
 import org.rossonet.savumerkki.manager.ConfigManagerBuilder;
 
+import com.azure.core.credential.TokenCredential;
 import com.bettercloud.vault.VaultConfig;
+import com.google.api.client.auth.oauth2.Credential;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class ConfigManagerTests {
@@ -74,9 +76,14 @@ public class ConfigManagerTests {
 		bm1.addGlobalEnrichMap(new JavaMap(50, new LinkedHashMap<>(), 3400, true));
 		bm1.addGlobalEnrichMap(new ExternalEnrich(generateExternalEnrishFunction()));
 		final VaultConfig hashicorpVaultConfig = new VaultConfig();
+		// TODO completare test Hashicorp Vault
 		bm1.addGlobalEnrichMap(new HashicorpVault(hashicorpVaultConfig, "default-context"));
-		bm1.addGlobalEnrichMap(new AzureVault());
-		bm1.addGlobalEnrichMap(new GoogleVault());
+		final TokenCredential azureToken = null; // TODO completare test Azure Vault
+		final String azureVaultUrl = null;
+		bm1.addGlobalEnrichMap(new AzureVault(azureToken, azureVaultUrl));
+		final Credential googleCredential = null; // TODO completare test Google Vault
+		final String googleMatter = null;
+		bm1.addGlobalEnrichMap(new GoogleVault("google-vault-test", googleCredential, googleMatter));
 		bm1.addGlobalEnrichMap(new EnviromentsMap());
 		addTestingConfigsBase(bm1);
 		final ConfigManager m1 = bm1.build();

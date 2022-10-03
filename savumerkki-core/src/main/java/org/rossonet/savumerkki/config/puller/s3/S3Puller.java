@@ -6,17 +6,17 @@ import org.rossonet.savumerkki.config.puller.AbstractPuller;
 
 public class S3Puller extends AbstractPuller {
 
+	private static final String S3_PULLER_PROTOCOL = "s3";
+
 	@Override
 	protected void configureFromUrl(final URL url) {
 		// TODO Auto-generated method stub
 
 	}
-	// TODO implement this puller
 
 	@Override
 	protected String getProtocol() {
-		// TODO Auto-generated method stub
-		return null;
+		return S3_PULLER_PROTOCOL;
 	}
 
 }
