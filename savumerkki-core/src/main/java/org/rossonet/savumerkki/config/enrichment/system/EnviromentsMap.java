@@ -1,17 +1,14 @@
 package org.rossonet.savumerkki.config.enrichment.system;
 
+import org.json.JSONObject;
+import org.rossonet.savumerkki.config.enrichment.AbstractEnrichMap;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 
-public class EnviromentsMap implements EnrichMap {
+public class EnviromentsMap extends AbstractEnrichMap {
 
-	private final boolean dontLogTheValue;
-	private final String postfix;
+	private String postfix;
 
-	private final String prefix;
-
-	private final int priority;
-
-	private final long timeoutResolutionMs;
+	private String prefix;
 
 	public EnviromentsMap() {
 		this(null, null, EnrichMap.DEFAULT_PRIORITY, EnrichMap.DEFAULT_TIMEOUT_RESOLUTION_MS,
@@ -20,16 +17,23 @@ public class EnviromentsMap implements EnrichMap {
 
 	public EnviromentsMap(final String prefix, final String postfix, final int priority, final long timeoutResolutionMs,
 			final boolean dontLogTheValue) {
-		this.priority = priority;
-		this.timeoutResolutionMs = timeoutResolutionMs;
-		this.dontLogTheValue = dontLogTheValue;
+		setPriority(priority);
+		setTimeoutResolutionMs(timeoutResolutionMs);
+		setDontLogTheValue(dontLogTheValue);
 		this.prefix = prefix;
 		this.postfix = postfix;
 	}
 
 	@Override
-	public boolean dontLogTheValue() {
-		return dontLogTheValue;
+	public void configureFromJson(final JSONObject jsonConfig) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void configureFromYaml(final String yamlConfig) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -39,17 +43,31 @@ public class EnviromentsMap implements EnrichMap {
 	}
 
 	@Override
-	public int getPriority() {
-		return priority;
+	public JSONObject getEnrichMapAsJson() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public long getTimeoutResolutionMs() {
-		return timeoutResolutionMs;
+	public String getEnrichMapAsYaml() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	public void resetConnection() {
-		// not used
+	public String getPostfix() {
+		return postfix;
 	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPostfix(final String postfix) {
+		this.postfix = postfix;
+	}
+
+	public void setPrefix(final String prefix) {
+		this.prefix = prefix;
+	}
+
 }

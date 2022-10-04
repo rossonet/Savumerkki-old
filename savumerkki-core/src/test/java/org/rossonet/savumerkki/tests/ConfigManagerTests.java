@@ -124,7 +124,8 @@ public class ConfigManagerTests {
 	private void addTestingConfigHttp(final ConfigManagerBuilder bm1) {
 		final Map<String, String> map = new LinkedHashMap<>();
 		map.put("env1", "val1");
-		final Puller pullerHttp = new HttpPuller();
+		final URL httpUrl = null; // TODO implementare ambiente test
+		final Puller pullerHttp = new HttpPuller(httpUrl);
 		bm1.addMonitoredConfig(bm1.newMonitoredConfigBuilder().addEnrichMap(new JavaMap(50, map, 3400, true))
 				.addPuller(pullerHttp).addUpdateObserver(generateObserver()));
 
@@ -133,7 +134,8 @@ public class ConfigManagerTests {
 	private void addTestingConfigS3(final ConfigManagerBuilder bm1) {
 		final Map<String, String> map = new LinkedHashMap<>();
 		map.put("env1", "val1");
-		final Puller pullerS3 = new S3Puller();
+		final URL s3Url = null;// TODO implementare ambiente test
+		final Puller pullerS3 = new S3Puller(s3Url);
 		bm1.addMonitoredConfig(bm1.newMonitoredConfigBuilder().addEnrichMap(new JavaMap(50, map, 3400, true))
 				.addPuller(pullerS3).addUpdateObserver(generateObserver()));
 
@@ -145,7 +147,8 @@ public class ConfigManagerTests {
 				.addEnrichMap(new ExternalEnrich(generateExternalEnrishFunction())).addPuller(pullerDns)
 				.setValidator(getYamlValidator()).addUpdateObserver(generateObserver()).build());
 
-		final Puller pullerFile = new FilePuller();
+		final URL fileUrl = null; // TODO implementare ambiente test
+		final Puller pullerFile = new FilePuller(fileUrl);
 		final Map<String, String> map = new LinkedHashMap<>();
 		map.put("env1", "val1");
 		bm1.addMonitoredConfig(bm1.newMonitoredConfigBuilder().addEnrichMap(new JavaMap(50, map, 3400, true))
@@ -155,13 +158,16 @@ public class ConfigManagerTests {
 	private void addTestingConfigsGit(final ConfigManagerBuilder bm1) {
 		final Map<String, String> map = new LinkedHashMap<>();
 		map.put("env1", "val1");
-		final Puller pullerGenericGit = new GitPuller();
+		final URL gitUrl = null; // TODO implementare ambiente test
+		final Puller pullerGenericGit = new GitPuller(gitUrl);
 		bm1.addMonitoredConfig(bm1.newMonitoredConfigBuilder().addEnrichMap(new JavaMap(50, map, 3400, true))
 				.addPuller(pullerGenericGit).addUpdateObserver(generateObserver()));
-		final Puller pullerGithub = new GithubPuller();
+		final URL githubUrl = null; // TODO implementare ambiente test
+		final Puller pullerGithub = new GithubPuller(githubUrl);
 		bm1.addMonitoredConfig(bm1.newMonitoredConfigBuilder().addEnrichMap(new JavaMap(50, map, 3400, true))
 				.addPuller(pullerGithub).addUpdateObserver(generateObserver()));
-		final Puller pullerGiLab = new GitlabPuller();
+		final URL gitlabUrl = null; // TODO implementare ambiente test
+		final Puller pullerGiLab = new GitlabPuller(gitlabUrl);
 		bm1.addMonitoredConfig(bm1.newMonitoredConfigBuilder().addEnrichMap(new JavaMap(50, map, 3400, true))
 				.addPuller(pullerGiLab).addUpdateObserver(generateObserver()));
 

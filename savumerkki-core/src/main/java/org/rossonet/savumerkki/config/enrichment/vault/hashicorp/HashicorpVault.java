@@ -1,28 +1,40 @@
 package org.rossonet.savumerkki.config.enrichment.vault.hashicorp;
 
+import org.json.JSONObject;
+import org.rossonet.savumerkki.config.enrichment.AbstractEnrichMap;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 
 import com.bettercloud.vault.Vault;
 import com.bettercloud.vault.VaultConfig;
 
-public class HashicorpVault implements EnrichMap {
+public class HashicorpVault extends AbstractEnrichMap {
 
-	private final String logicalVaultKey;
-	private final int priority;
-	private final long timeoutResolutionMs;
+	private String logicalVaultKey;
 	private Vault vault = null;
-	private final VaultConfig vaultConfig;
+	private VaultConfig vaultConfig;
 
 	public HashicorpVault(final int priority, final VaultConfig vaultConfig, final String logicalVaultKey,
 			final long timeoutResolutionMs) {
-		this.priority = priority;
 		this.vaultConfig = vaultConfig;
 		this.logicalVaultKey = logicalVaultKey;
-		this.timeoutResolutionMs = timeoutResolutionMs;
+		setPriority(priority);
+		setTimeoutResolutionMs(timeoutResolutionMs);
 	}
 
 	public HashicorpVault(final VaultConfig vaultConfig, final String logicalVaultKey) {
 		this(EnrichMap.DEFAULT_PRIORITY, vaultConfig, logicalVaultKey, EnrichMap.DEFAULT_TIMEOUT_RESOLUTION_MS);
+	}
+
+	@Override
+	public void configureFromJson(final JSONObject jsonConfig) {
+		// TODO Auto-generated method stub
+		vault = null;
+	}
+
+	@Override
+	public void configureFromYaml(final String yamlConfig) {
+		// TODO Auto-generated method stub
+		vault = null;
 	}
 
 	@Override
@@ -42,26 +54,33 @@ public class HashicorpVault implements EnrichMap {
 		return vault.logical().read(logicalVaultKey).getData().get(key);
 	}
 
+	@Override
+	public JSONObject getEnrichMapAsJson() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getEnrichMapAsYaml() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public String getLogicalVaultKey() {
 		return logicalVaultKey;
-	}
-
-	@Override
-	public int getPriority() {
-		return priority;
-	}
-
-	@Override
-	public long getTimeoutResolutionMs() {
-		return timeoutResolutionMs;
 	}
 
 	public VaultConfig getVaultConfig() {
 		return vaultConfig;
 	}
 
-	@Override
-	public synchronized void resetConnection() {
+	public void setLogicalVaultKey(final String logicalVaultKey) {
+		this.logicalVaultKey = logicalVaultKey;
+		vault = null;
+	}
+
+	public void setVaultConfig(final VaultConfig vaultConfig) {
+		this.vaultConfig = vaultConfig;
 		vault = null;
 	}
 

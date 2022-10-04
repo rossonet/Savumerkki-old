@@ -16,6 +16,12 @@ public abstract class AbstractPuller implements Puller {
 		// TODO registrazione automatica classi base
 	}
 
+	private final URL originalUrl;
+
+	public AbstractPuller(final URL url) {
+		this.originalUrl = url;
+	}
+
 	@Override
 	public void fire() {
 		// TODO Auto-generated method stub
@@ -47,20 +53,13 @@ public abstract class AbstractPuller implements Puller {
 	}
 
 	@Override
-	public Puller getPullerObserver() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public URL geturl() {
+	public PullerCallback getPullerObserver() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean isOneTimeOnlyConfigured() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -70,7 +69,9 @@ public abstract class AbstractPuller implements Puller {
 
 	}
 
-	protected abstract void configureFromUrl(final URL url);
+	protected URL getOriginalUrl() {
+		return originalUrl;
+	}
 
 	protected abstract String getProtocol();
 

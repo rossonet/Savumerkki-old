@@ -38,12 +38,12 @@ public class ConfigManagerBuilder {
 	}
 
 	public ConfigManagerBuilder fromJson(final JSONObject jsonConfiguration) {
-		configManager = ConfigManagerInterpreter.getConfigFromJson(jsonConfiguration);
+		configManager = ConfigInterpreter.getConfigManagerFromJson(jsonConfiguration);
 		return this;
 	}
 
 	public ConfigManagerBuilder fromYaml(final String yamlConfiguration) {
-		configManager = ConfigManagerInterpreter.getConfigFromYaml(yamlConfiguration);
+		configManager = ConfigInterpreter.getConfigManagerFromYaml(yamlConfiguration);
 		return this;
 	}
 

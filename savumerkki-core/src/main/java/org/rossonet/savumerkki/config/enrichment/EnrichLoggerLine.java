@@ -1,8 +1,11 @@
 package org.rossonet.savumerkki.config.enrichment;
 
-public final class EnrichLoggerLine {
+import java.io.Serializable;
 
-	private final EnrichMap enrichMap;
+public final class EnrichLoggerLine implements Serializable {
+
+	private static final long serialVersionUID = -2898753016501622062L;
+	private transient final EnrichMap enrichMap;
 	private final String key;
 	private final long priority;
 	private final boolean secret;

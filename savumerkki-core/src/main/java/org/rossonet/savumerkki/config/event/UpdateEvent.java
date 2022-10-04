@@ -1,5 +1,6 @@
 package org.rossonet.savumerkki.config.event;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -7,13 +8,14 @@ import org.rossonet.savumerkki.config.MonitoredConfig;
 import org.rossonet.savumerkki.config.enrichment.EnrichLoggerLine;
 import org.rossonet.savumerkki.config.validator.ValidationError;
 
-public final class UpdateEvent {
+public final class UpdateEvent implements Serializable {
 
+	private static final long serialVersionUID = -1183108184837669816L;
 	private final LocalDateTime datetime;
 	private final Collection<EnrichLoggerLine> enrichLogger;
 	private final Collection<ValidationError> errors;
 	private final long generation;
-	private final MonitoredConfig monitoredConfig;
+	private transient final MonitoredConfig monitoredConfig;
 	private final String payloadElaborated;
 	private final String payloadTemplate;
 

@@ -8,10 +8,15 @@ public class FilePuller extends AbstractPuller {
 
 	private static final String FILE_PULLER_PROTOCOL = "file";
 
-	@Override
-	protected void configureFromUrl(final URL url) {
-		// TODO Auto-generated method stub
+	public FilePuller(final URL url) {
+		super(url);
+		// TODO Auto-generated constructor stub
+	}
 
+	@Override
+	public URL geturl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

@@ -8,10 +8,15 @@ public class GitPuller extends AbstractPuller {
 
 	private static final String GIT_PULLER_PROTOCOL = "git";
 
-	@Override
-	protected void configureFromUrl(final URL url) {
-		// TODO Auto-generated method stub
+	public GitPuller(final URL url) {
+		super(url);
+		// TODO Auto-generated constructor stub
+	}
 
+	@Override
+	public URL geturl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

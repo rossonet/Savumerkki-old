@@ -1,5 +1,6 @@
 package org.rossonet.savumerkki.manager;
 
+import org.json.JSONObject;
 import org.rossonet.savumerkki.config.MonitoredConfig;
 import org.rossonet.savumerkki.config.TemplateVariable;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
@@ -14,6 +15,16 @@ public class MonitoredConfigBuilder {
 	// mantenere non pubblico!
 	MonitoredConfigBuilder(final ConfigManager manager) {
 		this.monitoredConfig = new MonitoredConfigImpl(manager);
+	}
+
+	MonitoredConfigBuilder(final ConfigManager manager, final JSONObject jsonConfig) {
+		this.monitoredConfig = ConfigInterpreter.getMonitoredConfigFromJson(jsonConfig);
+		((MonitoredConfigImpl) monitoredConfig).setConfigManager(manager);
+	}
+
+	MonitoredConfigBuilder(final ConfigManager manager, final String yamlConfig) {
+		this.monitoredConfig = ConfigInterpreter.getMonitoredConfigFromYaml(yamlConfig);
+		((MonitoredConfigImpl) monitoredConfig).setConfigManager(manager);
 	}
 
 	public MonitoredConfigBuilder addEnrichMap(final EnrichMap enrichMap) {

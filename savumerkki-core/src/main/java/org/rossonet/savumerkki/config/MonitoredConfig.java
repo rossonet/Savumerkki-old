@@ -2,11 +2,13 @@ package org.rossonet.savumerkki.config;
 
 import java.util.Collection;
 
+import org.json.JSONObject;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 import org.rossonet.savumerkki.config.event.ConfigUpdateEventObserver;
 import org.rossonet.savumerkki.config.puller.Puller;
 import org.rossonet.savumerkki.config.validator.Validator;
 import org.rossonet.savumerkki.manager.ConfigManager;
+import org.rossonet.savumerkki.manager.ConfigInterpreter;
 
 public interface MonitoredConfig extends AutoCloseable {
 
@@ -17,6 +19,14 @@ public interface MonitoredConfig extends AutoCloseable {
 	public void addUpdateObserver(ConfigUpdateEventObserver observer);
 
 	public void forceReload();
+
+	public default JSONObject getConfigAsJson() {
+		return ConfigInterpreter.getJsonFromMonitoredConfig(this);
+	}
+
+	public default String getConfigAsYaml() {
+		return ConfigInterpreter.getYamlFromMonitoredConfig(this);
+	}
 
 	public long getConfigGeneration();
 

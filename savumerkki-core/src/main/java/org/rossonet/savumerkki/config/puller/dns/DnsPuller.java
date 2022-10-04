@@ -8,10 +8,15 @@ public class DnsPuller extends AbstractPuller {
 
 	private static final String DNS_PULLER_PROTOCOL = "dns";
 
-	@Override
-	protected void configureFromUrl(final URL url) {
-		// TODO Auto-generated method stub
+	public DnsPuller(final URL url) {
+		super(url);
+		// TODO Auto-generated constructor stub
+	}
 
+	@Override
+	public URL geturl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

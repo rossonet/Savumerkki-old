@@ -8,10 +8,15 @@ public class HttpPuller extends AbstractPuller {
 
 	private static final String HTTP_PULLER_PROTOCOL = "http";
 
-	@Override
-	protected void configureFromUrl(final URL url) {
-		// TODO Auto-generated method stub
+	public HttpPuller(final URL url) {
+		super(url);
+		// TODO Auto-generated constructor stub
+	}
 
+	@Override
+	public URL geturl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

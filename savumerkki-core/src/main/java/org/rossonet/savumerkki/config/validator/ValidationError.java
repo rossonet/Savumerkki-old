@@ -1,7 +1,10 @@
 package org.rossonet.savumerkki.config.validator;
 
-public final class ValidationError {
+import java.io.Serializable;
 
+public final class ValidationError implements Serializable {
+
+	private static final long serialVersionUID = 4365284538766857797L;
 	private final long errorBeginCharacter;
 	private final String errorDescription;
 	private final long errorEndCharacter;

@@ -21,9 +21,13 @@ public interface ConfigManager extends AutoCloseable {
 
 	public void forceReloadAll();
 
-	public JSONObject getConfigAsJson();
+	public default JSONObject getConfigAsJson() {
+		return ConfigInterpreter.getJsonFromConfigManager(this);
+	}
 
-	public String getConfigAsYaml();
+	public default String getConfigAsYaml() {
+		return ConfigInterpreter.getYamlFromConfigManager(this);
+	}
 
 	public long getConfigGeneration();
 

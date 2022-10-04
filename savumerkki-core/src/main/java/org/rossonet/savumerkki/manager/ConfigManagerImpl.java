@@ -2,12 +2,11 @@ package org.rossonet.savumerkki.manager;
 
 import java.util.Collection;
 
-import org.json.JSONObject;
 import org.rossonet.savumerkki.config.MonitoredConfig;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 import org.rossonet.savumerkki.config.event.ConfigUpdateEventObserver;
 
-public class ConfigManagerImpl implements ConfigManager {
+class ConfigManagerImpl implements ConfigManager {
 
 	// mantenere non pubblico!
 	ConfigManagerImpl() {
@@ -42,18 +41,6 @@ public class ConfigManagerImpl implements ConfigManager {
 	public void forceReloadAll() {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public JSONObject getConfigAsJson() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getConfigAsYaml() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

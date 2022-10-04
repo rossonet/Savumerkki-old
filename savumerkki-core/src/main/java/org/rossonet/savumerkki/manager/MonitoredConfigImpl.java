@@ -9,7 +9,7 @@ import org.rossonet.savumerkki.config.event.ConfigUpdateEventObserver;
 import org.rossonet.savumerkki.config.puller.Puller;
 import org.rossonet.savumerkki.config.validator.Validator;
 
-public class MonitoredConfigImpl implements MonitoredConfig {
+class MonitoredConfigImpl implements MonitoredConfig {
 
 	// mantenere non pubblico!
 	MonitoredConfigImpl(final ConfigManager manager) {
@@ -192,6 +192,12 @@ public class MonitoredConfigImpl implements MonitoredConfig {
 
 	@Override
 	public void setValidator(final Validator validator) {
+		// TODO Auto-generated method stub
+
+	}
+
+	// mantenere NON public
+	void setConfigManager(final ConfigManager manager) {
 		// TODO Auto-generated method stub
 
 	}

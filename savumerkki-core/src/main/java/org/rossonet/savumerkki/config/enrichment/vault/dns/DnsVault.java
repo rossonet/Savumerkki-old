@@ -1,26 +1,37 @@
 package org.rossonet.savumerkki.config.enrichment.vault.dns;
 
+import org.json.JSONObject;
+import org.rossonet.savumerkki.config.enrichment.AbstractEnrichMap;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 import org.rossonet.savumerkki.utils.DnsHelper;
 import org.rossonet.savumerkki.utils.TextHelper;
 
-public class DnsVault implements EnrichMap {
+public class DnsVault extends AbstractEnrichMap {
 
-	private final String domain;
-	private final int priority;
-	private final String secretKey;
-
-	private final long timeoutResolutionMs;
+	private String domain;
+	private String secretKey;
 
 	public DnsVault(final String domain, final String secretKey) {
 		this(domain, secretKey, EnrichMap.DEFAULT_PRIORITY, EnrichMap.DEFAULT_TIMEOUT_RESOLUTION_MS);
 	}
 
 	public DnsVault(final String domain, final String secretKey, final int priority, final long timeoutResolutionMs) {
-		this.priority = priority;
-		this.timeoutResolutionMs = timeoutResolutionMs;
+		setPriority(priority);
+		setTimeoutResolutionMs(timeoutResolutionMs);
 		this.domain = domain;
 		this.secretKey = secretKey;
+
+	}
+
+	@Override
+	public void configureFromJson(final JSONObject jsonConfig) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void configureFromYaml(final String yamlConfig) {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -40,18 +51,27 @@ public class DnsVault implements EnrichMap {
 	}
 
 	@Override
-	public int getPriority() {
-		return priority;
+	public JSONObject getEnrichMapAsJson() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public long getTimeoutResolutionMs() {
-		return timeoutResolutionMs;
+	public String getEnrichMapAsYaml() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	public void resetConnection() {
-		// nothing to do
+	public String getSecretKey() {
+		return secretKey;
+	}
+
+	public void setDomain(final String domain) {
+		this.domain = domain;
+	}
+
+	public void setSecretKey(final String secretKey) {
+		this.secretKey = secretKey;
 	}
 
 }

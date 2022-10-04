@@ -1,9 +1,12 @@
 package org.rossonet.savumerkki.config.puller;
 
-public final class NewConfigFromPuller {
+import java.io.Serializable;
 
+public final class NewConfigFromPuller implements Serializable {
+
+	private static final long serialVersionUID = 2646184539525041268L;
 	private final String channelControlValue;
-	private final Puller puller;
+	private transient final Puller puller;
 	private final long pullerConfigGeneration;
 	private final String templateConfig;
 
