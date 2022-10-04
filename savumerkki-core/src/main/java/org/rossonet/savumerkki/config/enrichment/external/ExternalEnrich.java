@@ -11,7 +11,7 @@ public class ExternalEnrich extends AbstractEnrichMap {
 
 	public static final String FUNCTION_FIELD = "function";
 	static {
-		AbstractEnrichMap.registerEnrichMap(ExternalEnrich.class);
+		EnrichMap.registerEnrichMap(ExternalEnrich.class);
 	}
 
 	private ExternalEnrichFunction function;

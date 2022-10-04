@@ -30,9 +30,9 @@ import org.rossonet.savumerkki.config.puller.git.GithubPuller;
 import org.rossonet.savumerkki.config.puller.git.GitlabPuller;
 import org.rossonet.savumerkki.config.puller.http.HttpPuller;
 import org.rossonet.savumerkki.config.puller.s3.S3Puller;
-import org.rossonet.savumerkki.config.validator.JsonValidator;
 import org.rossonet.savumerkki.config.validator.Validator;
-import org.rossonet.savumerkki.config.validator.YamlValidator;
+import org.rossonet.savumerkki.config.validator.json.JsonValidator;
+import org.rossonet.savumerkki.config.validator.yaml.YamlValidator;
 import org.rossonet.savumerkki.manager.ConfigManager;
 import org.rossonet.savumerkki.manager.ConfigManagerBuilder;
 

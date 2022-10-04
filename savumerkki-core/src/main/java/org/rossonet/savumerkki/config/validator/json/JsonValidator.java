@@ -1,12 +1,19 @@
-package org.rossonet.savumerkki.config.validator;
+package org.rossonet.savumerkki.config.validator.json;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.json.JSONObject;
 import org.rossonet.savumerkki.config.event.UpdateEvent;
+import org.rossonet.savumerkki.config.validator.AbstractValidator;
+import org.rossonet.savumerkki.config.validator.ValidationError;
+import org.rossonet.savumerkki.config.validator.Validator;
 
-public class JsonValidator implements Validator {
+public class JsonValidator extends AbstractValidator {
+
+	static {
+		Validator.registerValidator(JsonValidator.class);
+	}
 
 	@Override
 	public Collection<ValidationError> checkValidationErrors(final UpdateEvent configToCheck) {

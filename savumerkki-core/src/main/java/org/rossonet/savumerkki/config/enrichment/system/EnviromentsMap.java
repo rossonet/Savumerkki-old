@@ -11,7 +11,7 @@ public class EnviromentsMap extends AbstractEnrichMap {
 	public static final String PREFIX_FIELD = "prefix";
 
 	static {
-		AbstractEnrichMap.registerEnrichMap(EnviromentsMap.class);
+		EnrichMap.registerEnrichMap(EnviromentsMap.class);
 	}
 
 	private String postfix;

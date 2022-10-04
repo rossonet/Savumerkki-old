@@ -1,5 +1,8 @@
 package org.rossonet.savumerkki.config.enrichment;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +11,12 @@ public abstract class AbstractEnrichMap implements EnrichMap {
 
 	public static final String DONT_LOG_VALUE_FIELD = "dont-log-the-value";
 
+	public static final String DRIVER_FIELD = "driver";
+	private static final Set<Class<? extends EnrichMap>> enrichMaps = new HashSet<>();
 	private final static Logger LOG = LoggerFactory.getLogger(AbstractEnrichMap.class);
+
 	public static final String PRIORITY_FIELD = "priority";
+
 	public static final String TIMEOUT_RESOLUTION_MS_FIELD = "timeout-resolution-ms";
 
 	static EnrichMap fromJson(final JSONObject jsonConfig) {
@@ -17,14 +24,18 @@ public abstract class AbstractEnrichMap implements EnrichMap {
 		return null;
 	}
 
-	public static EnrichMap fromYaml(final String yamlConfig) {
+	static EnrichMap fromYaml(final String yamlConfig) {
 		// TODO implementare logiche
 		return null;
 	}
 
-	public static void registerEnrichMap(final Class<? extends EnrichMap> enrichMap) {
+	static Set<Class<? extends EnrichMap>> getEnrichmaps() {
+		return enrichMaps;
+	}
+
+	static void registerEnrichMap(final Class<? extends EnrichMap> enrichMap) {
 		LOG.info(enrichMap.getName() + " registered as enrich map");
-		// TODO implementare registrazione per resolver da nome classe
+		enrichMaps.add(enrichMap);
 	}
 
 	private boolean dontLogTheValue = false;
@@ -57,6 +68,7 @@ public abstract class AbstractEnrichMap implements EnrichMap {
 		json.put(PRIORITY_FIELD, priority);
 		json.put(TIMEOUT_RESOLUTION_MS_FIELD, timeoutResolutionMs);
 		json.put(DONT_LOG_VALUE_FIELD, dontLogTheValue);
+		json.put(DRIVER_FIELD, getClass().getName());
 		return json;
 	}
 

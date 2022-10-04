@@ -20,7 +20,7 @@ public class HashicorpVault extends AbstractEnrichMap {
 
 	public static final String VAULT_CONFIG_KEY_FIELD = "vault-config";
 	static {
-		AbstractEnrichMap.registerEnrichMap(HashicorpVault.class);
+		EnrichMap.registerEnrichMap(HashicorpVault.class);
 	}
 	private String logicalVaultKey;
 

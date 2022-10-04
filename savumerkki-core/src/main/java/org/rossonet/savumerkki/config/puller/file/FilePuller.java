@@ -3,10 +3,15 @@ package org.rossonet.savumerkki.config.puller.file;
 import java.net.URL;
 
 import org.rossonet.savumerkki.config.puller.AbstractPuller;
+import org.rossonet.savumerkki.config.puller.Puller;
 
 public class FilePuller extends AbstractPuller {
 
 	private static final String FILE_PULLER_PROTOCOL = "file";
+
+	static {
+		Puller.registerPuller(FilePuller.class);
+	}
 
 	public FilePuller(final URL url) {
 		super(url);
@@ -14,14 +19,14 @@ public class FilePuller extends AbstractPuller {
 	}
 
 	@Override
-	public URL geturl() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getProtocol() {
+		return FILE_PULLER_PROTOCOL;
 	}
 
 	@Override
-	protected String getProtocol() {
-		return FILE_PULLER_PROTOCOL;
+	public URL geturl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

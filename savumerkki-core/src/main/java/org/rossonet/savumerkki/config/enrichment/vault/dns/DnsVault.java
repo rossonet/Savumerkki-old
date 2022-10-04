@@ -12,7 +12,7 @@ public class DnsVault extends AbstractEnrichMap {
 	public static final String SECRET_FIELD = "secret-key";
 
 	static {
-		AbstractEnrichMap.registerEnrichMap(DnsVault.class);
+		EnrichMap.registerEnrichMap(DnsVault.class);
 	}
 	private String domain;
 

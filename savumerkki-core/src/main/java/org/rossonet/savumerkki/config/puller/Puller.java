@@ -1,6 +1,7 @@
 package org.rossonet.savumerkki.config.puller;
 
 import java.net.URL;
+import java.util.Set;
 
 import org.rossonet.savumerkki.config.MonitoredConfig;
 
@@ -10,7 +11,11 @@ public interface Puller {
 		return AbstractPuller.fromUrl(url);
 	}
 
-	public static void registerPuller(final Class<Puller> pullerClass) {
+	public static Set<Class<? extends Puller>> getPullers() {
+		return AbstractPuller.getPullers();
+	}
+
+	public static void registerPuller(final Class<? extends Puller> pullerClass) {
 		AbstractPuller.registerPuller(pullerClass);
 	}
 

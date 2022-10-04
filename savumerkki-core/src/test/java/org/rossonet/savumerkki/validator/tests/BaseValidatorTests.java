@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.rossonet.savumerkki.config.event.UpdateEvent;
-import org.rossonet.savumerkki.config.validator.JsonValidator;
 import org.rossonet.savumerkki.config.validator.ValidationError;
-import org.rossonet.savumerkki.config.validator.YamlValidator;
+import org.rossonet.savumerkki.config.validator.json.JsonValidator;
+import org.rossonet.savumerkki.config.validator.yaml.YamlValidator;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class BaseValidatorTests {

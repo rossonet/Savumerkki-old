@@ -27,7 +27,7 @@ public class GoogleVault extends AbstractEnrichMap {
 	public static final String TOKEN_USERNAME_FIELD = "token-username";
 
 	static {
-		AbstractEnrichMap.registerEnrichMap(GoogleVault.class);
+		EnrichMap.registerEnrichMap(GoogleVault.class);
 	}
 
 	private String applicationName;

@@ -1,15 +1,22 @@
-package org.rossonet.savumerkki.config.validator;
+package org.rossonet.savumerkki.config.validator.yaml;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
 import org.rossonet.savumerkki.config.event.UpdateEvent;
+import org.rossonet.savumerkki.config.validator.AbstractValidator;
+import org.rossonet.savumerkki.config.validator.ValidationError;
+import org.rossonet.savumerkki.config.validator.Validator;
 import org.yaml.snakeyaml.Yaml;
 
-public class YamlValidator implements Validator {
+public class YamlValidator extends AbstractValidator {
 
 	private static final Yaml snakeyaml = new Yaml();
+
+	static {
+		Validator.registerValidator(YamlValidator.class);
+	}
 
 	@Override
 	public Collection<ValidationError> checkValidationErrors(final UpdateEvent configToCheck) {

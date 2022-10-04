@@ -1,5 +1,7 @@
 package org.rossonet.savumerkki.config.enrichment;
 
+import java.util.Set;
+
 import org.json.JSONObject;
 
 public interface EnrichMap {
@@ -18,7 +20,11 @@ public interface EnrichMap {
 		return AbstractEnrichMap.fromYaml(yamlConfig);
 	}
 
-	public static void registerEnrichMap(final Class<EnrichMap> enrichMap) {
+	public static Set<Class<? extends EnrichMap>> getEnrichmaps() {
+		return AbstractEnrichMap.getEnrichmaps();
+	}
+
+	public static void registerEnrichMap(final Class<? extends EnrichMap> enrichMap) {
 		AbstractEnrichMap.registerEnrichMap(enrichMap);
 	}
 

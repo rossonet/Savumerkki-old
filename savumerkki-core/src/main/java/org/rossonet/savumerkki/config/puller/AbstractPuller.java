@@ -1,19 +1,31 @@
 package org.rossonet.savumerkki.config.puller;
 
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.rossonet.savumerkki.config.MonitoredConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractPuller implements Puller {
+
+	private final static Logger LOG = LoggerFactory.getLogger(AbstractPuller.class);
+
+	private static final Set<Class<? extends Puller>> pullers = new HashSet<>();
 
 	static Puller fromUrl(final URL url) {
 		// TODO implementare Puller HTTP, HTTPS, DNS, GIT, LOCAL_FILE e S3
 		return null;
 	}
 
-	static void registerPuller(final Class<Puller> pullerClass) {
-		// TODO implementare registrazione per resolver da url
-		// TODO registrazione automatica classi base
+	static Set<Class<? extends Puller>> getPullers() {
+		return pullers;
+	}
+
+	static void registerPuller(final Class<? extends Puller> pullerClass) {
+		LOG.info(pullerClass.getName() + " registered as puller");
+		pullers.add(pullerClass);
 	}
 
 	private final URL originalUrl;
@@ -52,6 +64,12 @@ public abstract class AbstractPuller implements Puller {
 		return null;
 	}
 
+	protected URL getOriginalUrl() {
+		return originalUrl;
+	}
+
+	protected abstract String getProtocol();
+
 	@Override
 	public PullerCallback getPullerObserver() {
 		// TODO Auto-generated method stub
@@ -68,11 +86,5 @@ public abstract class AbstractPuller implements Puller {
 		// TODO Auto-generated method stub
 
 	}
-
-	protected URL getOriginalUrl() {
-		return originalUrl;
-	}
-
-	protected abstract String getProtocol();
 
 }

@@ -11,7 +11,7 @@ import org.rossonet.savumerkki.utils.TextHelper;
 public class JavaMap extends AbstractEnrichMap {
 	public static final String MAP_FIELD = "map";
 	static {
-		AbstractEnrichMap.registerEnrichMap(JavaMap.class);
+		EnrichMap.registerEnrichMap(JavaMap.class);
 	}
 
 	private Map<String, String> map;

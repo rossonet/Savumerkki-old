@@ -23,7 +23,7 @@ public class AzureVault extends AbstractEnrichMap {
 
 	public static final String URL_FIELD = "url";
 	static {
-		AbstractEnrichMap.registerEnrichMap(AzureVault.class);
+		EnrichMap.registerEnrichMap(AzureVault.class);
 	}
 	private TokenCredential azureCredential;
 	private String keyVaultUrl;

@@ -3,10 +3,15 @@ package org.rossonet.savumerkki.config.puller.http;
 import java.net.URL;
 
 import org.rossonet.savumerkki.config.puller.AbstractPuller;
+import org.rossonet.savumerkki.config.puller.Puller;
 
 public class HttpsPuller extends AbstractPuller {
 
 	private static final String HTTPS_PULLER_PROTOCOL = "https";
+
+	static {
+		Puller.registerPuller(HttpsPuller.class);
+	}
 
 	public HttpsPuller(final URL url) {
 		super(url);
@@ -14,14 +19,14 @@ public class HttpsPuller extends AbstractPuller {
 	}
 
 	@Override
-	public URL geturl() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getProtocol() {
+		return HTTPS_PULLER_PROTOCOL;
 	}
 
 	@Override
-	protected String getProtocol() {
-		return HTTPS_PULLER_PROTOCOL;
+	public URL geturl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
