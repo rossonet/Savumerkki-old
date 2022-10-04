@@ -6,6 +6,14 @@ import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 
 public class EnviromentsMap extends AbstractEnrichMap {
 
+	public static final String POSTFIX_FIELD = "postfix";
+
+	public static final String PREFIX_FIELD = "prefix";
+
+	static {
+		AbstractEnrichMap.registerEnrichMap(EnviromentsMap.class);
+	}
+
 	private String postfix;
 
 	private String prefix;
@@ -26,12 +34,14 @@ public class EnviromentsMap extends AbstractEnrichMap {
 
 	@Override
 	public void configureFromJson(final JSONObject jsonConfig) {
-		// TODO Auto-generated method stub
-
+		super.configureFromJson(jsonConfig);
+		postfix = jsonConfig.getString(POSTFIX_FIELD);
+		prefix = jsonConfig.getString(PREFIX_FIELD);
 	}
 
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
+		super.configureFromYaml(yamlConfig);
 		// TODO Auto-generated method stub
 
 	}
@@ -44,8 +54,10 @@ public class EnviromentsMap extends AbstractEnrichMap {
 
 	@Override
 	public JSONObject getEnrichMapAsJson() {
-		// TODO Auto-generated method stub
-		return null;
+		final JSONObject json = super.getEnrichMapAsJson();
+		json.put(PREFIX_FIELD, prefix);
+		json.put(POSTFIX_FIELD, postfix);
+		return json;
 	}
 
 	@Override
@@ -68,6 +80,28 @@ public class EnviromentsMap extends AbstractEnrichMap {
 
 	public void setPrefix(final String prefix) {
 		this.prefix = prefix;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("EnviromentsMap [");
+		if (postfix != null) {
+			builder.append("postfix=");
+			builder.append(postfix);
+			builder.append(", ");
+		}
+		if (prefix != null) {
+			builder.append("prefix=");
+			builder.append(prefix);
+			builder.append(", ");
+		}
+		if (super.toString() != null) {
+			builder.append("toString()=");
+			builder.append(super.toString());
+		}
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

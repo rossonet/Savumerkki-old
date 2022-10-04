@@ -1,18 +1,29 @@
 package org.rossonet.savumerkki.utils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
+
+import org.json.JSONObject;
 
 public final class TextHelper {
 
@@ -51,6 +62,40 @@ public final class TextHelper {
 		final SecretKeySpec k = new SecretKeySpec(key, ENCRYPTION_ALGORITHM);
 		c.init(Cipher.ENCRYPT_MODE, k);
 		return c.doFinal(dataToEncrypt);
+	}
+
+	public static JSONObject getJsonFromMap(final Map<String, String> map) {
+		final JSONObject json = new JSONObject();
+		for (final String key : map.keySet()) {
+			json.put(key, map.get(key));
+		}
+		return json;
+	}
+
+	public static Map<String, String> getMapFromJson(final JSONObject jsonMap) {
+		final Map<String, String> map = new HashMap<>();
+		for (final String key : jsonMap.keySet()) {
+			map.put(key, jsonMap.getString(key));
+		}
+		return map;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <O extends Serializable> O objectFromString(final String string, final Class<O> clazz)
+			throws IOException, ClassNotFoundException {
+		final byte[] data = Base64.getDecoder().decode(string);
+		final ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
+		final Object o = ois.readObject();
+		ois.close();
+		return (O) o;
+	}
+
+	public static String objectToString(final Serializable object) throws IOException {
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		final ObjectOutputStream oos = new ObjectOutputStream(baos);
+		oos.writeObject(object);
+		oos.close();
+		return Base64.getEncoder().encodeToString(baos.toByteArray());
 	}
 
 	public static List<String> splitFixSize(final String s, final int chunkSize) {

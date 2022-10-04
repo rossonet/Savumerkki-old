@@ -8,8 +8,19 @@ import org.rossonet.savumerkki.utils.TextHelper;
 
 public class DnsVault extends AbstractEnrichMap {
 
+	public static final String DOMAIN_FIELD = "domain";
+	public static final String SECRET_FIELD = "secret-key";
+
+	static {
+		AbstractEnrichMap.registerEnrichMap(DnsVault.class);
+	}
 	private String domain;
+
 	private String secretKey;
+
+	public DnsVault() {
+		this(null, null, EnrichMap.DEFAULT_PRIORITY, EnrichMap.DEFAULT_TIMEOUT_RESOLUTION_MS);
+	}
 
 	public DnsVault(final String domain, final String secretKey) {
 		this(domain, secretKey, EnrichMap.DEFAULT_PRIORITY, EnrichMap.DEFAULT_TIMEOUT_RESOLUTION_MS);
@@ -18,6 +29,7 @@ public class DnsVault extends AbstractEnrichMap {
 	public DnsVault(final String domain, final String secretKey, final int priority, final long timeoutResolutionMs) {
 		setPriority(priority);
 		setTimeoutResolutionMs(timeoutResolutionMs);
+		setDontLogTheValue(true);
 		this.domain = domain;
 		this.secretKey = secretKey;
 
@@ -25,19 +37,15 @@ public class DnsVault extends AbstractEnrichMap {
 
 	@Override
 	public void configureFromJson(final JSONObject jsonConfig) {
-		// TODO Auto-generated method stub
-
+		super.configureFromJson(jsonConfig);
+		domain = jsonConfig.getString(DOMAIN_FIELD);
+		secretKey = jsonConfig.getString(SECRET_FIELD);
 	}
 
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
+		super.configureFromYaml(yamlConfig);
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean dontLogTheValue() {
-		return true;
 	}
 
 	@Override
@@ -52,8 +60,10 @@ public class DnsVault extends AbstractEnrichMap {
 
 	@Override
 	public JSONObject getEnrichMapAsJson() {
-		// TODO Auto-generated method stub
-		return null;
+		final JSONObject json = super.getEnrichMapAsJson();
+		json.put(DOMAIN_FIELD, domain);
+		json.put(SECRET_FIELD, secretKey);
+		return json;
 	}
 
 	@Override
@@ -72,6 +82,23 @@ public class DnsVault extends AbstractEnrichMap {
 
 	public void setSecretKey(final String secretKey) {
 		this.secretKey = secretKey;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("DnsVault [");
+		if (domain != null) {
+			builder.append("domain=");
+			builder.append(domain);
+			builder.append(", ");
+		}
+		if (super.toString() != null) {
+			builder.append("toString()=");
+			builder.append(super.toString());
+		}
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

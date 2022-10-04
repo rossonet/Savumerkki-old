@@ -21,7 +21,7 @@ import org.rossonet.savumerkki.config.validator.YamlValidator;
 public class BaseValidatorTests {
 
 	@Test
-	@Order(2)
+	@Order(3)
 	public void jsonValidatorKoTest() throws Exception {
 		final JsonValidator jsonValidator = new JsonValidator();
 		final String text = "{-- 'field':['data':1,'data2','string data]}";
@@ -34,7 +34,7 @@ public class BaseValidatorTests {
 	}
 
 	@Test
-	@Order(3)
+	@Order(1)
 	public void jsonValidatorOkTest() throws Exception {
 		final JsonValidator jsonValidator = new JsonValidator();
 		final String text = "{'field':{'data':1,'data2':'string data'},'array':['ciao','hello']}";

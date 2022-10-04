@@ -38,6 +38,7 @@ dependencies {
   api group: 'org.json', name: 'json', version: '20211205'
   api 'org.yaml:snakeyaml:1.32'
   api 'dnsjava:dnsjava:3.5.1'
+  implementation 'org.slf4j:slf4j-api:2.0.3'
   
   // Microsoft Azure vault
   // https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/keyvault/azure-security-keyvault-secrets
@@ -57,6 +58,7 @@ dependencies {
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
   testImplementation group: 'com.ginsberg', name: 'junit5-system-exit', version: '1.1.2'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+  testImplementation 'org.slf4j:slf4j-simple:2.0.3'
 }
 
 task eclipseClosedDependencies {}

@@ -6,8 +6,14 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.rossonet.savumerkki.config.enrichment.AbstractEnrichMap;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
+import org.rossonet.savumerkki.utils.TextHelper;
 
 public class JavaMap extends AbstractEnrichMap {
+	public static final String MAP_FIELD = "map";
+	static {
+		AbstractEnrichMap.registerEnrichMap(JavaMap.class);
+	}
+
 	private Map<String, String> map;
 
 	public JavaMap() {
@@ -33,12 +39,13 @@ public class JavaMap extends AbstractEnrichMap {
 
 	@Override
 	public void configureFromJson(final JSONObject jsonConfig) {
-		// TODO Auto-generated method stub
-
+		super.configureFromJson(jsonConfig);
+		map = TextHelper.getMapFromJson(jsonConfig.getJSONObject(MAP_FIELD));
 	}
 
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
+		super.configureFromYaml(yamlConfig);
 		// TODO Auto-generated method stub
 
 	}
@@ -54,8 +61,9 @@ public class JavaMap extends AbstractEnrichMap {
 
 	@Override
 	public JSONObject getEnrichMapAsJson() {
-		// TODO Auto-generated method stub
-		return null;
+		final JSONObject json = super.getEnrichMapAsJson();
+		json.put(MAP_FIELD, TextHelper.getJsonFromMap(map));
+		return json;
 	}
 
 	@Override
@@ -70,5 +78,22 @@ public class JavaMap extends AbstractEnrichMap {
 
 	public void setMap(final Map<String, String> map) {
 		this.map = map;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("JavaMap [");
+		if (map != null) {
+			builder.append("map=");
+			builder.append(map);
+			builder.append(", ");
+		}
+		if (super.toString() != null) {
+			builder.append("toString()=");
+			builder.append(super.toString());
+		}
+		builder.append("]");
+		return builder.toString();
 	}
 }
