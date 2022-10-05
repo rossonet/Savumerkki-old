@@ -34,4 +34,16 @@ public abstract class AbstractValidator implements Validator {
 		validators.add(validatorClass);
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("AbstractValidator [");
+		if (getClass() != null) {
+			builder.append("getClass()=");
+			builder.append(getClass().getName());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

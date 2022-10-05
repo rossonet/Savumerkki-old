@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.rossonet.savumerkki.config.enrichment.AbstractEnrichMap;
+import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 import org.rossonet.savumerkki.config.enrichment.external.ConfigurationException;
 import org.rossonet.savumerkki.config.enrichment.external.ExternalEnrich;
 import org.rossonet.savumerkki.config.enrichment.external.ExternalEnrichFunction;
@@ -45,15 +46,15 @@ public class ToFromJsonEnviromentTests {
 		final String username = UUID.randomUUID().toString();
 		final String password = UUID.randomUUID().toString();
 		e.setAzureCredential(username, password);
-		final AzureVault c = new AzureVault();
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
 		final JSONObject enrichMapAsJson = e.getEnrichMapAsJson();
-		c.configureFromJson(enrichMapAsJson);
+		// c.configureFromJson(enrichMapAsJson);
 		assertEquals(AzureVault.class.getName(), enrichMapAsJson.getString(AbstractEnrichMap.DRIVER_FIELD));
 		assertEquals(priority, c.getPriority());
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
 		assertEquals(Base64Util.encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8)),
-				c.getAzureCredential().getToken(null).block().getToken());
+				((AzureVault) c).getAzureCredential().getToken(null).block().getToken());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
 	}
 
@@ -72,15 +73,15 @@ public class ToFromJsonEnviromentTests {
 		final String username = UUID.randomUUID().toString();
 		final String password = UUID.randomUUID().toString();
 		e.setAzureCredential(new BasicAuthenticationCredential(username, password));
-		final AzureVault c = new AzureVault();
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
 		final JSONObject enrichMapAsJson = e.getEnrichMapAsJson();
-		c.configureFromJson(enrichMapAsJson);
+		// c.configureFromJson(enrichMapAsJson);
 		assertEquals(AzureVault.class.getName(), enrichMapAsJson.getString(AbstractEnrichMap.DRIVER_FIELD));
 		assertEquals(priority, c.getPriority());
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
 		assertEquals(Base64Util.encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8)),
-				c.getAzureCredential().getToken(null).block().getToken());
+				((AzureVault) c).getAzureCredential().getToken(null).block().getToken());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
 	}
 
@@ -98,12 +99,12 @@ public class ToFromJsonEnviromentTests {
 		e.setDomain(domain);
 		final String secret = UUID.randomUUID().toString();
 		e.setSecretKey(secret);
-		final DnsVault c = new DnsVault();
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
 		final JSONObject enrichMapAsJson = e.getEnrichMapAsJson();
-		c.configureFromJson(enrichMapAsJson);
+		// c.configureFromJson(enrichMapAsJson);
 		assertEquals(DnsVault.class.getName(), enrichMapAsJson.getString(AbstractEnrichMap.DRIVER_FIELD));
-		assertEquals(domain, c.getDomain());
-		assertEquals(secret, c.getSecretKey());
+		assertEquals(domain, ((DnsVault) c).getDomain());
+		assertEquals(secret, ((DnsVault) c).getSecretKey());
 		assertEquals(priority, c.getPriority());
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
@@ -124,12 +125,12 @@ public class ToFromJsonEnviromentTests {
 		e.setPostfix(postfixValue);
 		final String prefixValue = UUID.randomUUID().toString();
 		e.setPrefix(prefixValue);
-		final EnviromentsMap c = new EnviromentsMap();
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
 		final JSONObject enrichMapAsJson = e.getEnrichMapAsJson();
-		c.configureFromJson(enrichMapAsJson);
+		// c.configureFromJson(enrichMapAsJson);
 		assertEquals(EnviromentsMap.class.getName(), enrichMapAsJson.getString(AbstractEnrichMap.DRIVER_FIELD));
-		assertEquals(prefixValue, c.getPrefix());
-		assertEquals(postfixValue, c.getPostfix());
+		assertEquals(prefixValue, ((EnviromentsMap) c).getPrefix());
+		assertEquals(postfixValue, ((EnviromentsMap) c).getPostfix());
 		assertEquals(priority, c.getPriority());
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
@@ -147,7 +148,7 @@ public class ToFromJsonEnviromentTests {
 		e.setDontLogTheValue(dontLogTheValue);
 		final long leastSignificantBits = UUID.randomUUID().getLeastSignificantBits();
 		e.setTimeoutResolutionMs(leastSignificantBits);
-		final ExternalEnrich c = new ExternalEnrich();
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
 		final JSONObject originalEnrichMapAsJson = e.getEnrichMapAsJson();
 		final Throwable exception = assertThrows(ConfigurationException.class, () -> {
 			final JSONObject jsonForException = e.getEnrichMapAsJson();
@@ -159,7 +160,7 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(function.getClass().getName(), originalEnrichMapAsJson.getString("function"));
 		c.configureFromJson(originalEnrichMapAsJson);
 		final String keyTest = UUID.randomUUID().toString();
-		assertEquals("just for test, key is " + keyTest, c.get(keyTest));
+		assertEquals("just for test, key is " + keyTest, ((ExternalEnrich) c).get(keyTest));
 		assertEquals(priority, c.getPriority());
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
@@ -183,17 +184,17 @@ public class ToFromJsonEnviromentTests {
 		final String username = UUID.randomUUID().toString();
 		final String password = UUID.randomUUID().toString();
 		e.setCredential(username, password);
-		final GoogleVault c = new GoogleVault();
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
 		final JSONObject enrichMapAsJson = e.getEnrichMapAsJson();
-		c.configureFromJson(enrichMapAsJson);
+		// c.configureFromJson(enrichMapAsJson);
 		assertEquals(GoogleVault.class.getName(), enrichMapAsJson.getString(AbstractEnrichMap.DRIVER_FIELD));
 		assertEquals(priority, c.getPriority());
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
-		assertEquals(matter, c.getMatter());
-		assertEquals(applicationName, c.getApplicationName());
-		assertEquals(username, c.getUsername());
-		assertEquals(password, c.getPassword());
+		assertEquals(matter, ((GoogleVault) c).getMatter());
+		assertEquals(applicationName, ((GoogleVault) c).getApplicationName());
+		assertEquals(username, ((GoogleVault) c).getUsername());
+		assertEquals(password, ((GoogleVault) c).getPassword());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
 	}
 
@@ -213,15 +214,15 @@ public class ToFromJsonEnviromentTests {
 		final VaultConfig vaultConfig = new VaultConfig();
 		vaultConfig.token(token);
 		e.setVaultConfig(vaultConfig);
-		final HashicorpVault c = new HashicorpVault();
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
 		final JSONObject enrichMapAsJson = e.getEnrichMapAsJson();
-		c.configureFromJson(enrichMapAsJson);
+		// c.configureFromJson(enrichMapAsJson);
 		assertEquals(HashicorpVault.class.getName(), enrichMapAsJson.getString(AbstractEnrichMap.DRIVER_FIELD));
 		assertEquals(priority, c.getPriority());
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
-		assertEquals(logicalVaultKey, c.getLogicalVaultKey());
-		assertEquals(token, c.getVaultConfig().getToken());
+		assertEquals(logicalVaultKey, ((HashicorpVault) c).getLogicalVaultKey());
+		assertEquals(token, ((HashicorpVault) c).getVaultConfig().getToken());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
 	}
 
@@ -246,19 +247,27 @@ public class ToFromJsonEnviromentTests {
 		testMap.put(key2, value2);
 		testMap.put(key3, value3);
 		e.setMap(testMap);
-		final JavaMap c = new JavaMap();
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
 		final JSONObject originalEnrichMapAsJson = e.getEnrichMapAsJson();
-		final JSONObject enrichMapAsJson = originalEnrichMapAsJson;
-		c.configureFromJson(enrichMapAsJson);
+		// final JSONObject enrichMapAsJson = originalEnrichMapAsJson;
+		// c.configureFromJson(enrichMapAsJson);
 		assertEquals(JavaMap.class.getName(), originalEnrichMapAsJson.getString(AbstractEnrichMap.DRIVER_FIELD));
 		assertEquals(priority, c.getPriority());
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
-		assertEquals(3, c.getMap().size());
-		assertEquals(value, c.getMap().get(key));
-		assertEquals(value2, c.getMap().get(key2));
-		assertEquals(value3, c.getMap().get(key3));
+		assertEquals(3, ((JavaMap) c).getMap().size());
+		assertEquals(value, ((JavaMap) c).getMap().get(key));
+		assertEquals(value2, ((JavaMap) c).getMap().get(key2));
+		assertEquals(value3, ((JavaMap) c).getMap().get(key3));
 		System.out.println("--- json file ---\n" + originalEnrichMapAsJson.toString(2));
+	}
+
+	@Test
+	@Order(20)
+	public void printAll() throws InstantiationException, IllegalAccessException {
+		for (final Class<? extends EnrichMap> e : EnrichMap.getEnrichmaps()) {
+			System.out.println(e.newInstance().toString());
+		}
 	}
 
 }
