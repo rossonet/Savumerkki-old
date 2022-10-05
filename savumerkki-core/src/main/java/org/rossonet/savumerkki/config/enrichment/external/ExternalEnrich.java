@@ -48,7 +48,7 @@ public class ExternalEnrich extends AbstractEnrichMap {
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
 		super.configureFromYaml(yamlConfig);
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 
 	}
 
@@ -66,7 +66,7 @@ public class ExternalEnrich extends AbstractEnrichMap {
 
 	@Override
 	public String getEnrichMapAsYaml() {
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		return null;
 	}
 

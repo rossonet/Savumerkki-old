@@ -72,7 +72,7 @@ public class GoogleVault extends AbstractEnrichMap {
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
 		super.configureFromYaml(yamlConfig);
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		this.service = null;
 	}
 
@@ -84,7 +84,7 @@ public class GoogleVault extends AbstractEnrichMap {
 					try {
 						this.service = new Vault.Builder(GoogleNetHttpTransport.newTrustedTransport(),
 								GsonFactory.getDefaultInstance(), credential).setApplicationName(applicationName)
-								.build();
+										.build();
 					} catch (GeneralSecurityException | IOException e) {
 						this.service = null;
 					}
@@ -114,7 +114,7 @@ public class GoogleVault extends AbstractEnrichMap {
 
 	@Override
 	public String getEnrichMapAsYaml() {
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		return null;
 	}
 

@@ -16,12 +16,12 @@ import com.azure.security.keyvault.secrets.SecretClientBuilder;
 
 public class AzureVault extends AbstractEnrichMap {
 
-	private final static Logger LOG = LoggerFactory.getLogger(AzureVault.class);
 	public static final String TOKEN_PASSWORD_FIELD = "token-password";
-
 	public static final String TOKEN_USERNAME_FIELD = "token-username";
 
 	public static final String URL_FIELD = "url";
+
+	private final static Logger LOG = LoggerFactory.getLogger(AzureVault.class);
 	static {
 		EnrichMap.registerEnrichMap(AzureVault.class);
 	}
@@ -59,7 +59,7 @@ public class AzureVault extends AbstractEnrichMap {
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
 		super.configureFromYaml(yamlConfig);
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		secretClient = null;
 
 	}
@@ -92,7 +92,7 @@ public class AzureVault extends AbstractEnrichMap {
 
 	@Override
 	public String getEnrichMapAsYaml() {
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		return null;
 	}
 

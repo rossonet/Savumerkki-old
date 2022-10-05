@@ -12,20 +12,33 @@ public abstract class AbstractEnrichMap implements EnrichMap {
 	public static final String DONT_LOG_VALUE_FIELD = "dont-log-the-value";
 
 	public static final String DRIVER_FIELD = "driver";
-	private static final Set<Class<? extends EnrichMap>> enrichMaps = new HashSet<>();
-	private final static Logger LOG = LoggerFactory.getLogger(AbstractEnrichMap.class);
-
 	public static final String PRIORITY_FIELD = "priority";
-
 	public static final String TIMEOUT_RESOLUTION_MS_FIELD = "timeout-resolution-ms";
 
+	private static final Set<Class<? extends EnrichMap>> enrichMaps = new HashSet<>();
+
+	private final static Logger LOG = LoggerFactory.getLogger(AbstractEnrichMap.class);
+
 	static EnrichMap fromJson(final JSONObject jsonConfig) {
-		// TODO implementare logiche
+		try {
+			if (jsonConfig.has(DRIVER_FIELD) && !jsonConfig.getString(DRIVER_FIELD).isEmpty()) {
+				for (final Class<? extends EnrichMap> e : enrichMaps) {
+					if (e.getClass().getName().equals(jsonConfig.getString(DRIVER_FIELD))) {
+						EnrichMap target;
+						target = e.newInstance();
+						target.configureFromJson(jsonConfig);
+						return target;
+					}
+				}
+			}
+		} catch (final Exception e1) {
+			LOG.error("creating enrich map from " + jsonConfig, e1);
+		}
 		return null;
 	}
 
 	static EnrichMap fromYaml(final String yamlConfig) {
-		// TODO implementare logiche
+		// TODO implementazione YAML
 		return null;
 	}
 
@@ -53,7 +66,7 @@ public abstract class AbstractEnrichMap implements EnrichMap {
 
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 
 	}
 
@@ -74,7 +87,7 @@ public abstract class AbstractEnrichMap implements EnrichMap {
 
 	@Override
 	public String getEnrichMapAsYaml() {
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		return null;
 	}
 

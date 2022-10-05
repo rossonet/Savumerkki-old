@@ -11,6 +11,20 @@ public abstract class AbstractValidator implements Validator {
 	private final static Logger LOG = LoggerFactory.getLogger(AbstractValidator.class);
 	private static final Set<Class<? extends Validator>> validators = new HashSet<>();
 
+	static Validator getValidator(final String validatorClass) {
+		for (final Class<? extends Validator> v : validators) {
+			if (v.getName().equals(validatorClass)) {
+				try {
+					return v.newInstance();
+				} catch (InstantiationException | IllegalAccessException e) {
+					LOG.error("creating validator " + validatorClass, e);
+					return null;
+				}
+			}
+		}
+		return null;
+	}
+
 	static Set<Class<? extends Validator>> getValidators() {
 		return validators;
 	}

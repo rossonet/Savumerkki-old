@@ -7,6 +7,10 @@ import org.rossonet.savumerkki.config.event.UpdateEvent;
 
 public interface Validator {
 
+	public static Validator getValidator(final String validatorClass) {
+		return AbstractValidator.getValidator(validatorClass);
+	}
+
 	public static Set<Class<? extends Validator>> getValidators() {
 		return AbstractValidator.getValidators();
 	}

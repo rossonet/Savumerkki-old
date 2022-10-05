@@ -17,7 +17,7 @@ public final class ConfigInterpreter {
 	}
 
 	public static ConfigManager getConfigManagerFromYaml(final String configManager) {
-		// TODO implementare configurazione in Yaml
+		// TODO implementazione YAML
 		return null;
 	}
 
@@ -37,17 +37,17 @@ public final class ConfigInterpreter {
 	}
 
 	public static MonitoredConfig getMonitoredConfigFromYaml(final String yamlConfig) {
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		return null;
 	}
 
 	public static String getYamlFromConfigManager(final ConfigManager configManager) {
-		// TODO implementare configurazione in Yaml
+		// TODO implementazione YAML
 		return null;
 	}
 
 	public static String getYamlFromMonitoredConfig(final MonitoredConfig monitoredConfig) {
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		return null;
 	}
 

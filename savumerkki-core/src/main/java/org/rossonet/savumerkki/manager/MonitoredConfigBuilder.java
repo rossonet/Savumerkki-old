@@ -33,6 +33,7 @@ public class MonitoredConfigBuilder {
 	}
 
 	public MonitoredConfigBuilder addPuller(final Puller puller) {
+		puller.setMonitoredConfig(monitoredConfig);
 		monitoredConfig.addPuller(puller);
 		return this;
 	}

@@ -4,6 +4,7 @@ import java.net.URL;
 
 import org.rossonet.savumerkki.config.puller.AbstractPuller;
 import org.rossonet.savumerkki.config.puller.Puller;
+import org.rossonet.savumerkki.config.puller.PullerContent;
 
 public class HttpsPuller extends AbstractPuller {
 
@@ -15,16 +16,21 @@ public class HttpsPuller extends AbstractPuller {
 
 	public HttpsPuller(final URL url) {
 		super(url);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	protected String getProtocol() {
+	public String getProtocol() {
 		return HTTPS_PULLER_PROTOCOL;
 	}
 
 	@Override
-	public URL geturl() {
+	public URL getUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected PullerContent getContentData() {
 		// TODO Auto-generated method stub
 		return null;
 	}

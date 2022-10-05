@@ -80,6 +80,19 @@ public final class TextHelper {
 		return map;
 	}
 
+	public static Map<String, String> getParametersInUrlQuery(final String query) {
+		final String[] params = query.split("&");
+		final Map<String, String> map = new HashMap<String, String>();
+
+		for (final String param : params) {
+			final String name = param.split("=")[0];
+			final String value = param.split("=")[1];
+			map.put(name, value);
+		}
+		return map;
+
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <O extends Serializable> O objectFromString(final String string, final Class<O> clazz)
 			throws IOException, ClassNotFoundException {

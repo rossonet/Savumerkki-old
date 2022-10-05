@@ -3,12 +3,11 @@ package org.rossonet.savumerkki.config.puller.git;
 import java.net.URL;
 
 import org.rossonet.savumerkki.config.puller.Puller;
+import org.rossonet.savumerkki.config.puller.PullerContent;
 
 public class GitlabPuller extends GitPuller {
 
 	private static final String GITLAB_PULLER_PROTOCOL = "gitlab";
-
-	// TODO implement this puller
 
 	static {
 		Puller.registerPuller(GitlabPuller.class);
@@ -16,16 +15,21 @@ public class GitlabPuller extends GitPuller {
 
 	public GitlabPuller(final URL url) {
 		super(url);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	protected String getProtocol() {
+	public String getProtocol() {
 		return GITLAB_PULLER_PROTOCOL;
 	}
 
 	@Override
-	public URL geturl() {
+	public URL getUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected PullerContent getContentData() {
 		// TODO Auto-generated method stub
 		return null;
 	}

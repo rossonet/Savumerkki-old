@@ -15,10 +15,10 @@ import com.bettercloud.vault.VaultConfig;
 
 public class HashicorpVault extends AbstractEnrichMap {
 
-	private final static Logger LOG = LoggerFactory.getLogger(HashicorpVault.class);
 	public static final String LOGICAL_VAULT_KEY_FIELD = "logical-vault-key";
-
 	public static final String VAULT_CONFIG_KEY_FIELD = "vault-config";
+
+	private final static Logger LOG = LoggerFactory.getLogger(HashicorpVault.class);
 	static {
 		EnrichMap.registerEnrichMap(HashicorpVault.class);
 	}
@@ -60,7 +60,7 @@ public class HashicorpVault extends AbstractEnrichMap {
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
 		super.configureFromYaml(yamlConfig);
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		vault = null;
 	}
 
@@ -90,7 +90,7 @@ public class HashicorpVault extends AbstractEnrichMap {
 
 	@Override
 	public String getEnrichMapAsYaml() {
-		// TODO Auto-generated method stub
+		// TODO implementazione YAML
 		return null;
 	}
 
