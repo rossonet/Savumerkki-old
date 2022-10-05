@@ -1,6 +1,7 @@
 package org.rossonet.savumerkki.enrichment.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.charset.StandardCharsets;
@@ -27,6 +28,11 @@ import org.rossonet.savumerkki.config.enrichment.vault.hashicorp.HashicorpVault;
 import com.azure.core.credential.BasicAuthenticationCredential;
 import com.azure.core.util.Base64Util;
 import com.bettercloud.vault.VaultConfig;
+import com.google.api.client.auth.oauth2.BearerToken;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.Credential.AccessMethod;
+import com.google.api.client.http.BasicAuthentication;
+import com.google.api.client.http.HttpExecuteInterceptor;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class ToFromJsonEnviromentTests {
@@ -56,6 +62,7 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(Base64Util.encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8)),
 				((AzureVault) c).getAzureCredential().getToken(null).block().getToken());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
 	}
 
 	@Test
@@ -83,6 +90,7 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(Base64Util.encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8)),
 				((AzureVault) c).getAzureCredential().getToken(null).block().getToken());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
 	}
 
 	@Test
@@ -109,6 +117,25 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
+	}
+
+	@Test
+	@Order(10)
+	public void driveNotFoundTest() {
+		final JSONObject jsonDriverNotFound = new JSONObject();
+		jsonDriverNotFound.put("driver", "org.not.found.DriverVault");
+		final EnrichMap c = EnrichMap.fromJson(jsonDriverNotFound);
+		assertNull(c);
+	}
+
+	@Test
+	@Order(10)
+	public void driveNullTest() {
+		final JSONObject jsonkeyNotFound = new JSONObject();
+		jsonkeyNotFound.put("no-driver-label", "org.not.found.DriverVault");
+		final EnrichMap c = EnrichMap.fromJson(jsonkeyNotFound);
+		assertNull(c);
 	}
 
 	@Test
@@ -135,6 +162,7 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
 	}
 
 	@Test
@@ -165,6 +193,7 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(dontLogTheValue, c.dontLogTheValue());
 		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
 		System.out.println("--- json file ---\n" + originalEnrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
 	}
 
 	@Test
@@ -196,6 +225,44 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(username, ((GoogleVault) c).getUsername());
 		assertEquals(password, ((GoogleVault) c).getPassword());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
+	}
+
+	@Test
+	@Order(7)
+	public void googleVaultTokenWithCredentialTest() {
+		final GoogleVault e = new GoogleVault();
+		final int priority = UUID.randomUUID().toString().hashCode();
+		e.setPriority(priority);
+		final boolean dontLogTheValue = priority % 2 == 0;
+		e.setDontLogTheValue(dontLogTheValue);
+		final long leastSignificantBits = UUID.randomUUID().getLeastSignificantBits();
+		e.setTimeoutResolutionMs(leastSignificantBits);
+		final String applicationName = UUID.randomUUID().toString();
+		final String matter = UUID.randomUUID().toString();
+		e.setApplicationName(applicationName);
+		e.setMatter(matter);
+		final String username = UUID.randomUUID().toString();
+		final String password = UUID.randomUUID().toString();
+		final AccessMethod method = BearerToken.authorizationHeaderAccessMethod();
+		final HttpExecuteInterceptor token = new BasicAuthentication(username, password);
+		final Credential credential = new Credential.Builder(method).setClientAuthentication(token).build();
+		e.setCredential(credential);
+		final EnrichMap c = EnrichMap.fromJson(e.getEnrichMapAsJson());
+		((GoogleVault) c).setUsername(username);
+		((GoogleVault) c).setPassword(password);
+		final JSONObject enrichMapAsJson = e.getEnrichMapAsJson();
+		// c.configureFromJson(enrichMapAsJson);
+		assertEquals(GoogleVault.class.getName(), enrichMapAsJson.getString(AbstractEnrichMap.DRIVER_FIELD));
+		assertEquals(priority, c.getPriority());
+		assertEquals(dontLogTheValue, c.dontLogTheValue());
+		assertEquals(leastSignificantBits, c.getTimeoutResolutionMs());
+		assertEquals(matter, ((GoogleVault) c).getMatter());
+		assertEquals(applicationName, ((GoogleVault) c).getApplicationName());
+		assertEquals(username, ((GoogleVault) c).getUsername());
+		assertEquals(password, ((GoogleVault) c).getPassword());
+		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
 	}
 
 	@Test
@@ -224,6 +291,7 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(logicalVaultKey, ((HashicorpVault) c).getLogicalVaultKey());
 		assertEquals(token, ((HashicorpVault) c).getVaultConfig().getToken());
 		System.out.println("--- json file ---\n" + enrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
 	}
 
 	@Test
@@ -260,6 +328,15 @@ public class ToFromJsonEnviromentTests {
 		assertEquals(value2, ((JavaMap) c).getMap().get(key2));
 		assertEquals(value3, ((JavaMap) c).getMap().get(key3));
 		System.out.println("--- json file ---\n" + originalEnrichMapAsJson.toString(2));
+		System.out.println("e =>" + e.toString());
+		c.resetConnection();
+	}
+
+	@Test
+	@Order(10)
+	public void jsonNullTest() {
+		final EnrichMap c = EnrichMap.fromJson(null);
+		assertNull(c);
 	}
 
 	@Test

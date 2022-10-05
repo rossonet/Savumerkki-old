@@ -24,10 +24,10 @@ public class YamlValidator extends AbstractValidator {
 		try {
 			final Map<String, Object> obj = snakeyaml.load(configToCheck.getPayloadElaborated());
 			if (obj == null || obj.isEmpty()) {
-				errors.add(new ValidationError("error parsing yaml file", 0, 0));
+				errors.add(new ValidationError("error parsing yaml file", 0, 0, 0));
 			}
 		} catch (final Exception a) {
-			errors.add(new ValidationError(a.getMessage(), 0, 0));
+			errors.add(new ValidationError(a.getMessage(), 0, 0, 0));
 		}
 		return errors;
 	}

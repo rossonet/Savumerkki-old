@@ -57,7 +57,7 @@ public class GoogleVault extends AbstractEnrichMap {
 		setDontLogTheValue(true);
 		this.matter = matter;
 		this.applicationName = applicationName;
-		this.credential = credential;
+		setCredential(credential);
 
 	}
 
@@ -66,7 +66,11 @@ public class GoogleVault extends AbstractEnrichMap {
 		super.configureFromJson(jsonConfig);
 		setMatter(jsonConfig.getString(MATTER_FIELD));
 		setApplicationName(jsonConfig.getString(APPLICATION_NAME_FIELD));
-		setCredential(jsonConfig.getString(TOKEN_USERNAME_FIELD), jsonConfig.getString(TOKEN_PASSWORD_FIELD));
+		if (jsonConfig.has(TOKEN_USERNAME_FIELD) && jsonConfig.has(TOKEN_PASSWORD_FIELD)
+				&& !jsonConfig.getString(TOKEN_USERNAME_FIELD).isEmpty()
+				&& !jsonConfig.getString(TOKEN_PASSWORD_FIELD).isEmpty()) {
+			setCredential(jsonConfig.getString(TOKEN_USERNAME_FIELD), jsonConfig.getString(TOKEN_PASSWORD_FIELD));
+		}
 	}
 
 	@Override
@@ -84,7 +88,7 @@ public class GoogleVault extends AbstractEnrichMap {
 					try {
 						this.service = new Vault.Builder(GoogleNetHttpTransport.newTrustedTransport(),
 								GsonFactory.getDefaultInstance(), credential).setApplicationName(applicationName)
-										.build();
+								.build();
 					} catch (GeneralSecurityException | IOException e) {
 						this.service = null;
 					}

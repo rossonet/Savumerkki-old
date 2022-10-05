@@ -6,11 +6,14 @@ public final class ValidationError implements Serializable {
 
 	private static final long serialVersionUID = 4365284538766857797L;
 	private final long errorBeginCharacter;
+
 	private final String errorDescription;
 	private final long errorEndCharacter;
+	private final long errorLine;
 
-	public ValidationError(final String errorDescription, final long errorBeginCharacter,
+	public ValidationError(final String errorDescription, final long errorLine, final long errorBeginCharacter,
 			final long errorEndCharacter) {
+		this.errorLine = errorLine;
 		this.errorDescription = errorDescription;
 		this.errorBeginCharacter = errorBeginCharacter;
 		this.errorEndCharacter = errorEndCharacter;
@@ -28,11 +31,17 @@ public final class ValidationError implements Serializable {
 		return errorEndCharacter;
 	}
 
+	public long getErrorLine() {
+		return errorLine;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("ValidationError [errorDescription=");
 		builder.append(errorDescription);
+		builder.append(", errorLine=");
+		builder.append(errorLine);
 		builder.append(", errorBeginCharacter=");
 		builder.append(errorBeginCharacter);
 		builder.append(", errorEndCharacter=");

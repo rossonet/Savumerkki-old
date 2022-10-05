@@ -41,8 +41,10 @@ public final class UpdateEvent implements Serializable {
 
 	public String getEnrichLoggerAsString() {
 		final StringBuilder log = new StringBuilder();
-		for (final EnrichLoggerLine l : getEnrichLogger()) {
-			log.append(l.toString() + "\n");
+		if (getEnrichLogger() != null) {
+			for (final EnrichLoggerLine l : getEnrichLogger()) {
+				log.append(l.toString() + "\n");
+			}
 		}
 		return log.toString();
 	}

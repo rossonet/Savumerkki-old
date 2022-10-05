@@ -21,7 +21,7 @@ public class JsonValidator extends AbstractValidator {
 		try {
 			new JSONObject(configToCheck.getPayloadElaborated());
 		} catch (final Exception a) {
-			errors.add(new ValidationError(a.getMessage(), 0, 0));
+			errors.add(new ValidationError(a.getMessage(), 0, 0, 0));
 
 		}
 		return errors;

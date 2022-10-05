@@ -73,7 +73,6 @@ public abstract class AbstractEnrichMap implements EnrichMap {
 	@Override
 	public void configureFromYaml(final String yamlConfig) {
 		// TODO implementazione YAML
-
 	}
 
 	@Override
@@ -111,7 +110,6 @@ public abstract class AbstractEnrichMap implements EnrichMap {
 	@Override
 	public void resetConnection() {
 		// do nothing
-
 	}
 
 	public void setDontLogTheValue(final boolean dontLogTheValue) {

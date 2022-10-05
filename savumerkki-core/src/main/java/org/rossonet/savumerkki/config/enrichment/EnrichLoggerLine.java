@@ -8,7 +8,16 @@ public final class EnrichLoggerLine implements Serializable {
 	private transient final EnrichMap enrichMap;
 	private final String key;
 	private final long priority;
+	/**
+	 * in this record the field value is null because the EnrichMap have the
+	 * dont-log-the-value flag switched to true.
+	 */
 	private final boolean secret;
+	/**
+	 * this replacement is used to change the configuration. May be that we have
+	 * many EnrichMap whith the same key to replace, sorting by priority just one of
+	 * them is used.
+	 */
 	private final boolean used;
 	private final String value;
 
