@@ -43,7 +43,7 @@ dependencies {
   // Microsoft Azure vault
   // https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/keyvault/azure-security-keyvault-secrets
   implementation 'com.azure:azure-security-keyvault-secrets:4.5.0'
-
+  
   // Hashicorp Vault
   // https://bettercloud.github.io/vault-java-driver/
   implementation 'com.bettercloud:vault-java-driver:5.1.0'
@@ -53,6 +53,17 @@ dependencies {
   implementation 'com.google.api-client:google-api-client:2.0.0'
   implementation 'com.google.oauth-client:google-oauth-client-jetty:1.34.1'
   implementation 'com.google.apis:google-api-services-vault:v1-rev20220423-2.0.0'
+
+  // AWS S3
+  // https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/examples-s3-objects.html
+  implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
+  implementation 'com.amazonaws:aws-java-sdk-s3'
+  
+  // git, GitLab, GitHub
+  // https://wiki.eclipse.org/JGit/User_Guide
+  // https://www.baeldung.com/jgit
+  // https://www.codeaffine.com/2014/12/09/jgit-authentication/
+  implementation 'org.eclipse.jgit:org.eclipse.jgit:6.3.0.202209071007-r'
 
   // Test Tools
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
