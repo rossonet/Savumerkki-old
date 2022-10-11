@@ -10,10 +10,10 @@ import java.util.concurrent.TimeoutException;
 
 public final class ThreadHelper {
 
-	public static <T> T runWithTimeout(final Callable<T> callable, final long timeout, final TimeUnit timeUnit)
-			throws Exception {
+	public static <RETURN_TYPE> RETURN_TYPE runWithTimeout(final Callable<RETURN_TYPE> callable, final long timeout,
+			final TimeUnit timeUnit) throws Exception {
 		final ExecutorService executor = Executors.newSingleThreadExecutor();
-		final Future<T> future = executor.submit(callable);
+		final Future<RETURN_TYPE> future = executor.submit(callable);
 		executor.shutdown();
 		try {
 			return future.get(timeout, timeUnit);
