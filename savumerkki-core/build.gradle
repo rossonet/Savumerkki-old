@@ -16,7 +16,6 @@ version = rootProject.version
 
 ext {
 	sourceCompatibility = 1.8
-	ossrhPassword = System.getenv('OSSRH_PASSWORD')
 }
 
 repositories {
@@ -195,7 +194,7 @@ publishing {
       name = "sonatype"
       credentials {
         username "rossonet"
-        password "${ossrhPassword}"
+        password "${rootProject.ext.ossrhPassword}"
       }
     }
   }
