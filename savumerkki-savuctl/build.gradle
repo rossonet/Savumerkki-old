@@ -49,7 +49,7 @@ apply plugin: 'maven-publish'
 dependencies {
   implementation project(':savumerkki-core')
   implementation 'org.jline:jline:3.21.0'
-  implementation 'com.github.oshi:oshi-core:6.1.5'
+  implementation group: 'com.github.oshi', name: 'oshi-core', version: '6.2.2'
   implementation 'commons-logging:commons-logging:1.2'
   // Microsoft Azure vault
   // https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/keyvault/azure-security-keyvault-secrets
