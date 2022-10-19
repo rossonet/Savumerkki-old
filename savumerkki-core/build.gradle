@@ -145,7 +145,7 @@ task printTheiaIdeBackendDockerCommand(type: Exec) {
 
 task theiaIdeLocalBrowser(type: Exec) {
         group "Theia IDE on Docker Container"
-  	    description 'Open browser to local Theia IDE'
+        description 'Open browser to local Theia IDE'
         workingDir "./"
         commandLine 'xdg-open', 'http://localhost:3000'
 }
