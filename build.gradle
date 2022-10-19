@@ -54,6 +54,7 @@ task theiaIdeBackendStart(type: Exec) {
         group "Theia IDE on Docker Container"
         workingDir "./"
         commandLine 'docker', 'exec', '-u', 'root', "docker-ide-${project.name}", '/bin/chown', '-R', 'theia:theia', '/home/project'
+        commandLine 'docker', 'exec', '-u', 'root', "docker-ide-${project.name}", '/bin/chown', '-R', 'theia:theia', '/home/theia'
         doLast { println "\n\n*** You can find the Theia IDE at http://localhost:3000 ***" }
         doLast { println "To shutdown the IDE:\ndocker stop docker-ide-${project.name}\n- save your work on repository before!\n\n" }
 }
