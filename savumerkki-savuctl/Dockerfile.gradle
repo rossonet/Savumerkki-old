@@ -1,4 +1,5 @@
 FROM openjdk:8-jdk-alpine
+ARG MAINTAINER="Andrea Ambrosini <andrea.ambrosini@rossonet.org>"
 RUN apk add --no-cache bash gawk sed grep bc coreutils wget binutils
 COPY savumerkki-savuctl-0.1.0-all.jar terminal-client.jar
 ENTRYPOINT ["java"]
