@@ -1,5 +1,5 @@
 description = "java library to manage a system configuration in GitOps fashion"
-group = 'org.rossonet.savumerkki'
+group = 'net.rossonet.savumerkki'
 version = '0.1.0'
 
 ext {
