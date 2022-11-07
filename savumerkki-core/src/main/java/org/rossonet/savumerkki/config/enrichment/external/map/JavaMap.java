@@ -6,7 +6,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.rossonet.savumerkki.config.enrichment.AbstractEnrichMap;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
-import org.rossonet.savumerkki.utils.TextHelper;
+import org.rossonet.utils.TextHelper;
 
 public class JavaMap extends AbstractEnrichMap {
 	public static final String MAP_FIELD = "map";

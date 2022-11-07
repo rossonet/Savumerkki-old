@@ -6,6 +6,7 @@ import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.rossonet.utils.TextHelper;
 import org.xbill.DNS.DClass;
 import org.xbill.DNS.Lookup;
 import org.xbill.DNS.SimpleResolver;
@@ -45,8 +46,8 @@ public final class DnsHelper {
 	}
 
 	public static String toDnsRecord(final String name, final String payload) throws IOException {
-		final Iterable<String> chunks = TextHelper
-				.splitFixSize(Base64.getEncoder().encodeToString(payload.getBytes()), 254);
+		final Iterable<String> chunks = TextHelper.splitFixSize(Base64.getEncoder().encodeToString(payload.getBytes()),
+				254);
 		final StringBuilder result = new StringBuilder();
 		int counter = 0;
 		for (final String s : chunks) {

@@ -4,7 +4,7 @@ import org.json.JSONObject;
 import org.rossonet.savumerkki.config.enrichment.AbstractEnrichMap;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
 import org.rossonet.savumerkki.utils.DnsHelper;
-import org.rossonet.savumerkki.utils.TextHelper;
+import org.rossonet.utils.TextHelper;
 
 public class DnsVault extends AbstractEnrichMap {
 

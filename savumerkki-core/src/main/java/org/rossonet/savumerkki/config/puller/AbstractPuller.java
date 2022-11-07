@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.rossonet.savumerkki.config.MonitoredConfig;
 import org.rossonet.savumerkki.config.enrichment.external.ConfigurationException;
-import org.rossonet.savumerkki.utils.TextHelper;
-import org.rossonet.savumerkki.utils.ThreadHelper;
+import org.rossonet.utils.TextHelper;
+import org.rossonet.utils.ThreadHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
