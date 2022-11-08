@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.rossonet.savumerkki.config.enrichment.AbstractEnrichMap;
 import org.rossonet.savumerkki.config.enrichment.EnrichMap;
-import org.rossonet.savumerkki.utils.TextHelper;
+import org.rossonet.utils.TextHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
